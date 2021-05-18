@@ -29,7 +29,7 @@
 <meta property="og:description" content="先扯几句终于开始了博客之旅。 从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。 现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-18T09:22:37.000Z">
-<meta property="article:modified_time" content="2021-05-18T11:47:23.386Z">
+<meta property="article:modified_time" content="2021-05-18T11:51:06.793Z">
 <meta property="article:author" content="Muyiyunzi">
 <meta name="twitter:card" content="summary">
 
@@ -172,7 +172,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-05-18 17:22:37 / 修改时间：19:47:23" itemprop="dateCreated datePublished" datetime="2021-05-18T17:22:37+08:00">2021-05-18</time>
+              <time title="创建时间：2021-05-18 17:22:37 / 修改时间：19:51:06" itemprop="dateCreated datePublished" datetime="2021-05-18T17:22:37+08:00">2021-05-18</time>
             </span>
 
           
@@ -186,7 +186,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h3><p>终于开始了博客之旅。</p>
+        <h2 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h2><p>终于开始了博客之旅。</p>
 <p>从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。</p>
 <p>现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的兼容性不好，最终折中地选择了GitHub+markdown的这种方式。</p>
 <p>其实一直早就想写很多东西，比如三原色、田忌赛马等问题都用长图发在了朋友圈当中，还比如从去年就想写的《神奇的哥尼斯堡》，大概这和此篇一样都该被归为“杂文”之中；学术性的博客也很想写，从最早看机器学习、多视几何、ROS等，包括之后Parzen窗的理解等，就很想作为优质博客补充一下现在网络上的缺失；很多时候也应该停下来思考思考人生，写一写收获与感悟，所以总的来说内容可能会很杂——所以我也并不指望能有什么引流，或者一些学术文章可能会发在知乎上？总之也有许多问题没有想好，但总要先吃一次螃蟹再说，于是便有了此篇文章。</p>
@@ -194,11 +194,11 @@
 <p>下面进入正文。</p>
 <h2 id="使用VPS服务实现Windows-MacOS科学上网"><a href="#使用VPS服务实现Windows-MacOS科学上网" class="headerlink" title="使用VPS服务实现Windows/MacOS科学上网"></a>使用VPS服务实现Windows/MacOS科学上网</h2><p>这一部分是写给不会配置VPS服务的朋友的（俗称自己搭梯子），毕竟我知道很多人是买一些软件的服务才科学上网的，想当年两会时期我也找这些软件救过急。</p>
 <p>如果你已经会自己搭梯子了，那么这部分内容可以<a href="#jump">跳过</a>。else: Continue。</p>
-<h4 id="什么是VPS服务"><a href="#什么是VPS服务" class="headerlink" title="什么是VPS服务"></a>什么是VPS服务</h4><p>比如像搬瓦工、Vultr等这些知名的网站都是提供VPS（Virtual Private Server，虚拟专用服务器）服务的，大体上来说，就是他们会租赁给你一个ip地址，以及一个具有一定配置的服务器，允许这个服务器作为代理（proxy），让你这个服务器成为一个“中间商”，去访问其他网站，比如Google。</p>
+<h3 id="什么是VPS服务"><a href="#什么是VPS服务" class="headerlink" title="什么是VPS服务"></a>什么是VPS服务</h3><p>比如像搬瓦工、Vultr等这些知名的网站都是提供VPS（Virtual Private Server，虚拟专用服务器）服务的，大体上来说，就是他们会租赁给你一个ip地址，以及一个具有一定配置的服务器，允许这个服务器作为代理（proxy），让你这个服务器成为一个“中间商”，去访问其他网站，比如Google。</p>
 <p>我踩过了许多坑，这里直接说结论：最早我用Hostwinds，高峰时间段经常抽风，两会期间完全挂掉，遂换到了搬瓦工。然后搬瓦工是真的快，但是快不过两天，而且退款服务还只能使用一次，导致我现在还有几百块钱被困在搬瓦工上（就是我拥有他的ip地址，然后国内把他封了，ip地址在国外还可以代理使用所以对方拒绝给我退款……）。最终给我选择了<a target="_blank" rel="noopener" href="https://www.vultr.com/">vultr</a>，速度还不错（能流畅看YouTube我觉得就很不错了），关键是ip如果被封了还可以随时更换，完全是以使用时间计费，ip被封了就把这个instance destroy掉就可以了。</p>
 <p>为什么要折腾VPS服务呢？因为有了ip地址，你就可进行相应的配置，一个终端设备就只用使用一个端口，理论上，租赁一个ip地址就可以支持你六万多台设备的使用，这就好比<strong>租了一个房子</strong>，当然，服务器配置的好坏决定了你的带宽速度，价格越高房子就越大。而去那些VPN软件租赁的服务，他们本身拥有ip地址（房子），而只会给你分配一个或几个端口号，这就好像<strong>租了一个床位</strong>，如果这个房子太过拥挤（用户过多），那你的贷款就会很慢，甚至down掉。而且，一旦有些床位住了犯罪分子（用户不规范上网），这就会牵连整个房子，所以经常会出现一些VPN软件挂掉的情况，其实不是国家真的针对，只是有些人真的不规范上网。</p>
 <p>至于要房子还是要床位，这个见仁见智，各位自行取舍，<strong>但如果你只拥有床位，肯定是不能实现Ubuntu科学上网的</strong>，除非你找到也支持Ubuntu科学上网的VPN软件，据我所知基本没有。</p>
-<h4 id="如何配置科学上网"><a href="#如何配置科学上网" class="headerlink" title="如何配置科学上网"></a>如何配置科学上网</h4><p>这里以vultr为例。</p>
+<h3 id="如何配置科学上网"><a href="#如何配置科学上网" class="headerlink" title="如何配置科学上网"></a>如何配置科学上网</h3><p>这里以vultr为例。</p>
 <ol>
 <li>创建账号</li>
 <li>登陆账号</li>
@@ -236,7 +236,7 @@
 </ol>
 <div align=center><img width = 90% src ="https://i.loli.net/2021/05/18/CcFUD2VnqioN9ty.png"/></div>
 
-<h4 id="在CentOS-8系统下搭建shadowsocks"><a href="#在CentOS-8系统下搭建shadowsocks" class="headerlink" title="在CentOS 8系统下搭建shadowsocks"></a>在CentOS 8系统下搭建shadowsocks</h4><p>shadowsocks，官名「影梭」，人称「小飞机」，源自于它那具有标志性的小飞机logo，是一款非常良心的翻墙代理软件。它并不提供任何VPS服务，只是对本地的网络设置做了软件上的封装。实如其形，一旦有了VPS服务器，只需要简单的配置便可以“起飞”，这里提供如何从0到1的安装步骤。</p>
+<h3 id="在CentOS-8系统下搭建shadowsocks"><a href="#在CentOS-8系统下搭建shadowsocks" class="headerlink" title="在CentOS 8系统下搭建shadowsocks"></a>在CentOS 8系统下搭建shadowsocks</h3><p>shadowsocks，官名「影梭」，人称「小飞机」，源自于它那具有标志性的小飞机logo，是一款非常良心的翻墙代理软件。它并不提供任何VPS服务，只是对本地的网络设置做了软件上的封装。实如其形，一旦有了VPS服务器，只需要简单的配置便可以“起飞”，这里提供如何从0到1的安装步骤。</p>
 <p>多说一句，Hostwinds的VPS服务是很健全的，很多依赖都会给安装好，搬瓦工次之，Vultr最为原始。所以这一份安装步骤应该是最为完整的，理应也适用于其他VPS服务，不过注意VPS的操作系统必须是CentOS 8，否则可能会报错。</p>
 <hr>
 <p>下面进入具体步骤。</p>
@@ -300,7 +300,7 @@
 <p>检查当前防火墙状态：输出not running时就可以正常使用了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
 
-<h4 id="在Windows-MacOS下使用shadowsocks"><a href="#在Windows-MacOS下使用shadowsocks" class="headerlink" title="在Windows/MacOS下使用shadowsocks"></a>在Windows/MacOS下使用shadowsocks</h4><p>以上操作做都是通过SSH连接远程服务器进行配置，接下来需要从本地端进行配置。这时我们就可以使用图形化的界面更加方便的配置了。</p>
+<h3 id="在Windows-MacOS下使用shadowsocks"><a href="#在Windows-MacOS下使用shadowsocks" class="headerlink" title="在Windows/MacOS下使用shadowsocks"></a>在Windows/MacOS下使用shadowsocks</h3><p>以上操作做都是通过SSH连接远程服务器进行配置，接下来需要从本地端进行配置。这时我们就可以使用图形化的界面更加方便的配置了。</p>
 <p>对于windows系统用户，从shadowosocks官方的GitHub <a target="_blank" rel="noopener" href="https://github.com/shadowsocks/shadowsocks-windows/releases">Releases</a>中下载zip文件并解压。对于版本号，我这里的是4.2.0.1，更新的版本号似乎去除了对aes-256-cfb的支持，所以这里建议选择老版本（新版本没折腾过，不敢打包票哈哈）。</p>
 <p>对于MacOS用户，也可以从<a target="_blank" rel="noopener" href="https://github.com/shau-lok/shadowsocks-mac-dmg">此处</a>下载dmg文件进行安装。</p>
 <p>下面以windows为例。解压后运行exe文件，在菜单栏找到小飞机图标，右键即可进行各种配置，如开机启动等。对于系统代理选项，有三种模式：</p>
@@ -319,7 +319,7 @@
 <h2 id="使用VPS服务实现Ubuntu科学上网"><a href="#使用VPS服务实现Ubuntu科学上网" class="headerlink" title="使用VPS服务实现Ubuntu科学上网"></a>使用VPS服务实现Ubuntu科学上网</h2><p>终于讲到了正文部分。</p>
 <p>为啥Ubuntu这么特殊呢？嗯，因为连shadowsocks官方都把维护的qt5（一种linux上的可视化开发程序）版本的文件给remove了，所以在ubuntu上似乎很难找到一个较好的图形界面来配置。然后搜到的各种东西又都是让Ubuntu作为服务端来配置，本地端如何配置还真没几个人讲，大概大家Ubuntu都是用来跑程序，不科学上网的吧……</p>
 <p>我一度也是这样妥协的，直到两会期间连GitHub也被封了，我才下定决心让Ubuntu也要科学上网，否则我每次都必须把人家的代码fork到gitee上，然后对着gitee敲命令或者git clone，我嫌麻烦。（果然人类进步的源泉是懒2333）</p>
-<h4 id="使用terminal科学上网"><a href="#使用terminal科学上网" class="headerlink" title="使用terminal科学上网"></a>使用terminal科学上网</h4><p>虽然qt5挂掉了，但是shadowsocks官方的源还是封不掉的，所以首先在ubuntu本地安装shadowsocks：</p>
+<h3 id="使用terminal科学上网"><a href="#使用terminal科学上网" class="headerlink" title="使用terminal科学上网"></a>使用terminal科学上网</h3><p>虽然qt5挂掉了，但是shadowsocks官方的源还是封不掉的，所以首先在ubuntu本地安装shadowsocks：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks</span><br></pre></td></tr></table></figure>
 <p>我这里会安装到2.9.0-2这个版本，并且电脑会认为这就是最新版了。不知道是确实没有新版本了还是说官方源并不再更新新版本了，但反正这个版本肯定也够了。</p>
 <p>随后配置shadowsocks的json文件，这里与之前在服务端的配置是类似的。。</p>
@@ -339,7 +339,7 @@
 
 <p>点击确定后，如无问题则可访问Google。</p>
 <p>也就是说，刚才没关的那个终端，实际上是开了一个本地地址和端口号，来完成刚才的代理工作，而浏览器上的配置，则是要求了浏览器访问网页时要先走这个SOCKS主机及对应的端口。</p>
-<h4 id="开机自启动实现科学上网"><a href="#开机自启动实现科学上网" class="headerlink" title="开机自启动实现科学上网"></a>开机自启动实现科学上网</h4><p>于是，你就会很不爽：难道每次访问我都得开着这个终端不成？难道每次重启电脑还得开个终端输这个命令？显然，这是可以配置的。</p>
+<h3 id="开机自启动实现科学上网"><a href="#开机自启动实现科学上网" class="headerlink" title="开机自启动实现科学上网"></a>开机自启动实现科学上网</h3><p>于是，你就会很不爽：难道每次访问我都得开着这个终端不成？难道每次重启电脑还得开个终端输这个命令？显然，这是可以配置的。</p>
 <p>由于之前在超分屏上使用网抑云，qt界面的缩放让我很不爽，当时调过配置文件，所以我就想到，能不能配置一个开机自启动的程序呢？</p>
 <p>比如开机自启动teamviewer，实际上是电脑在后台打开了一个不会显示的终端，输入了一个teamviewer启动之类的命令，然后在GUI上就显示了打开的teamviewer，<strong>我能否也建立一个这种机制，让电脑自动帮我输入这个命令呢？</strong></p>
 <p>答案当然是可以的。</p>
@@ -360,7 +360,7 @@
 <p>以及如果你有余力，也可以把这个代理设置到全局，但我觉得这个要调整的就太多了，而且全局也并不一定真的有多好，就没有往下折腾了。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>所以实际上我这是一种阉割版的“Ubuntu”实现科学上网。因为我没有设置全局代理，如果git clone，或者pip、conda install什么的，走的还是本地网络，而这些东西是也很有可能间歇性挂掉的。不过我这算是一种折中吧，大部分包基本该下的都下过，都有缓存了，我这里只是希望能够安心地看GitHub，以及可能会用到YouTube看一些演示视频或者教程，debug时遇到Stack Overflow也不至于完全挂掉。</p>
 <p>而且这好像也<strong>给Firefox找到了存在的意义</strong>。以前总有人倡导，大家装了Ubuntu不要卸载firefox，否则把Chrome搞的一家独大了、寡头垄断了不好。现在从VPN代理的角度来讲，Firefox还是比Chrome方便多了，所以它值得出现在我的Favorite之中。</p>
-<h4 id="小福利"><a href="#小福利" class="headerlink" title="小福利"></a>小福利</h4><p>最近偶然找到了一个很好的PyTorch教程，这让我这个日常不上YouTube的用户找到了一丢丢上YouTube的理由。在这儿推荐给大家：</p>
+<h2 id="小福利"><a href="#小福利" class="headerlink" title="小福利"></a>小福利</h2><p>最近偶然找到了一个很好的PyTorch教程，这让我这个日常不上YouTube的用户找到了一丢丢上YouTube的理由。在这儿推荐给大家：</p>
 <p>课程主页：<a target="_blank" rel="noopener" href="https://deeplizard.com/learn/playlist/PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">deeplizard</a>（对应有视频内容的文字教程）<br>视频列表（需翻墙）：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">YouTube</a><br>视频列表（搬运版本）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eK411u7KQ?from=search&seid=13637531933091619180">bilibili</a>（我这里选择的是无字幕版本）</p>
 <p>正好可以拿这个链接测试下翻墙效果哦~</p>
 
@@ -440,7 +440,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E6%89%AF%E5%87%A0%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">先扯几句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Windows-MacOS%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number"></span> <span class="nav-text">使用VPS服务实现Windows&#x2F;MacOS科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFVPS%E6%9C%8D%E5%8A%A1"><span class="nav-number">0.1.</span> <span class="nav-text">什么是VPS服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">0.2.</span> <span class="nav-text">如何配置科学上网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8CentOS-8%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BAshadowsocks"><span class="nav-number">0.3.</span> <span class="nav-text">在CentOS 8系统下搭建shadowsocks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Windows-MacOS%E4%B8%8B%E4%BD%BF%E7%94%A8shadowsocks"><span class="nav-number">0.4.</span> <span class="nav-text">在Windows&#x2F;MacOS下使用shadowsocks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Ubuntu%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number"></span> <span class="nav-text">使用VPS服务实现Ubuntu科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8terminal%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">0.1.</span> <span class="nav-text">使用terminal科学上网</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">0.2.</span> <span class="nav-text">开机自启动实现科学上网</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number"></span> <span class="nav-text">结语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%A6%8F%E5%88%A9"><span class="nav-number">0.1.</span> <span class="nav-text">小福利</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%89%AF%E5%87%A0%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">先扯几句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Windows-MacOS%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">2.</span> <span class="nav-text">使用VPS服务实现Windows&#x2F;MacOS科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFVPS%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">什么是VPS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">2.2.</span> <span class="nav-text">如何配置科学上网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8CentOS-8%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BAshadowsocks"><span class="nav-number">2.3.</span> <span class="nav-text">在CentOS 8系统下搭建shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Windows-MacOS%E4%B8%8B%E4%BD%BF%E7%94%A8shadowsocks"><span class="nav-number">2.4.</span> <span class="nav-text">在Windows&#x2F;MacOS下使用shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Ubuntu%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.</span> <span class="nav-text">使用VPS服务实现Ubuntu科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8terminal%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.1.</span> <span class="nav-text">使用terminal科学上网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.2.</span> <span class="nav-text">开机自启动实现科学上网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%A6%8F%E5%88%A9"><span class="nav-number">5.</span> <span class="nav-text">小福利</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

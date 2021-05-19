@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cola.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cola-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cola-16x16.png">
+  <link rel="mask-icon" href="/images/cola-logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -18,7 +18,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"default","show_result":false},"back2top":{"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="In me the tiger sniffs the rose.">
@@ -132,6 +132,10 @@
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
     <main class="main">
@@ -168,10 +172,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-18 17:22:37 / 修改时间：19:51:06" itemprop="dateCreated datePublished" datetime="2021-05-18T17:22:37+08:00">2021-05-18</time>
+              <time title="创建时间：2021-05-18 17:22:37" itemprop="dateCreated datePublished" datetime="2021-05-18T17:22:37+08:00">2021-05-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 13:15:43" itemprop="dateModified" datetime="2021-05-19T13:15:43+08:00">2021-05-19</time>
+              </span>
 
           
 
@@ -239,64 +249,79 @@
 <hr>
 <p>下面进入具体步骤。</p>
 <p>先输入python按tab命令检查是否成功安装python。尽量不要动python2的环境，而安装python3。使用yum安装python：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install python36</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> python36<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装wget、tar</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget tar</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> <span class="token function">wget</span> <span class="token function">tar</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>首先下载setuptools的工具包 easy_install需要调用其中的内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate  https://pypi.python.org/packages/<span class="built_in">source</span>/s/setuptools/setuptools-19.6.tar.gz<span class="comment">#md5=c607dd118eae682c44ed146367a17e26</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> --no-check-certificate  https://pypi.python.org/packages/source/s/setuptools/setuptools-19.6.tar.gz<span class="token comment">#md5=c607dd118eae682c44ed146367a17e26</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>解压工具包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf setuptools-19.6.tar.gz</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> -zxvf setuptools-19.6.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>挂载到文件夹下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> setuptools-19.6</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> setuptools-19.6<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>编译（或者说配置环境？）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py build</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python3 setup.py build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装setuptools</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py install</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python3 setup.py <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装pip</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">easy_install pip</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">easy_install pip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>使用pip安装shadowsocks</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> shadowsocks<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>退出文件夹至根目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> <span class="token punctuation">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以使用<code>ls</code>命令查看当前文件，应该只有setuptools相关的文件</p>
 <p>用vi新建配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vi</span> /etc/shadowsocks.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>按<code>i</code>键进入insert模式，此后复制如下内容，在xshell中粘贴（shift+insert）即可。</p>
 <p>这个配置文件需要遵从json格式，建议预先在本地的文本文件中修改好。其中server就是你购买的ip地址，下边的port_password对应着连接时使用的端口号和密码，可以支持多端口同时连接，这里12561-12566只是一个示例，<strong>如果你需要可以开更多的端口</strong>。之后的********对应地替换为自己预设的密码。</p>
 <p>在修改时要注意json文件的格式，比如最后一个端口号的结尾不要有逗号、最后的false之后不要有逗号，总之如果报错可以考虑检查json的格式问题。<br><span id="jumpjson"></span></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;server&quot;</span>:<span class="string">&quot;***.***.***.***&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;local_address&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>, </span><br><span class="line">  <span class="attr">&quot;local_port&quot;</span>:<span class="number">28888</span>, </span><br><span class="line">  <span class="attr">&quot;port_password&quot;</span>: &#123; </span><br><span class="line">    <span class="attr">&quot;12561&quot;</span>: <span class="string">&quot;********&quot;</span>, </span><br><span class="line">    <span class="attr">&quot;12562&quot;</span>: <span class="string">&quot;********&quot;</span>, </span><br><span class="line">    <span class="attr">&quot;12563&quot;</span>: <span class="string">&quot;********&quot;</span>, </span><br><span class="line">    <span class="attr">&quot;12564&quot;</span>: <span class="string">&quot;********&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;12565&quot;</span>: <span class="string">&quot;********&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;12566&quot;</span>: <span class="string">&quot;********&quot;</span></span><br><span class="line">  &#125;, </span><br><span class="line">  <span class="attr">&quot;timeout&quot;</span>:<span class="number">300</span>, </span><br><span class="line">  <span class="attr">&quot;method&quot;</span>:<span class="string">&quot;aes-256-cfb&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;fast_open&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"server"</span><span class="token operator">:</span><span class="token string">"***.***.***.***"</span><span class="token punctuation">,</span>
+  <span class="token property">"local_address"</span><span class="token operator">:</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span> 
+  <span class="token property">"local_port"</span><span class="token operator">:</span><span class="token number">28888</span><span class="token punctuation">,</span> 
+  <span class="token property">"port_password"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> 
+    <span class="token property">"12561"</span><span class="token operator">:</span> <span class="token string">"********"</span><span class="token punctuation">,</span> 
+    <span class="token property">"12562"</span><span class="token operator">:</span> <span class="token string">"********"</span><span class="token punctuation">,</span> 
+    <span class="token property">"12563"</span><span class="token operator">:</span> <span class="token string">"********"</span><span class="token punctuation">,</span> 
+    <span class="token property">"12564"</span><span class="token operator">:</span> <span class="token string">"********"</span><span class="token punctuation">,</span>
+    <span class="token property">"12565"</span><span class="token operator">:</span> <span class="token string">"********"</span><span class="token punctuation">,</span>
+    <span class="token property">"12566"</span><span class="token operator">:</span> <span class="token string">"********"</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> 
+  <span class="token property">"timeout"</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> 
+  <span class="token property">"method"</span><span class="token operator">:</span><span class="token string">"aes-256-cfb"</span><span class="token punctuation">,</span>
+  <span class="token property">"fast_open"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再按esc退出insert模式，输入<code>:wq</code>保存并退出</p>
 <p>此时即可启动，建议使用后台启动命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssserver -c /etc/shadowsocks.json -d start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后输入<code>exit</code>即可退出xshell，配置完毕（并没有，你可能会报错哦）。</p>
 <hr>
 <p>如果遇到EVP_CIPHER_CTX_cleanup之类的报错，是因为在openssl1.1.0版本中，废弃了EVP_CIPHER_CTX_cleanup函数，此时可以通过vim修改此问题。</p>
 <p>首先检查vim编辑器是否完全安装。vim编辑器需要安装至少3个包（版本号不重要）：</p>
 <p>vim-enhanced-7.0.109-7.el5<br>vim-minimal-7.0.109-7.el5<br>vim-common-7.0.109-7.el5</p>
 <p>查看本机已经存在的包，确认一下你的VIM是否已经安装，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa|grep vim</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> -qa<span class="token operator">|</span><span class="token function">grep</span> <span class="token function">vim</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如何vim已经正确安装，则会显示上面三个包的名称<br>如果缺少了其中某个，比如说： vim-enhanced这个包少了，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vim-enhanced</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> vim-enhanced<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>类似地安装其他你缺少的包，它会自动下载安装。<br>如果上面三个包一个都没有显示，则直接输入命令：   </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vim*</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> vim*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装完毕后，通过vim修改openssl中的相关内容，替换下边的文件路径为报错traceback的路径（这里我的路径是这个，作为举例）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/lib/python3.6/site-packages/shadowsocks/crypto/openssl.py</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /usr/local/lib/python3.6/site-packages/shadowsocks/crypto/openssl.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>全文搜索cleanup，将所有EVP_CIPHER_CTX_cleanup替换成为EVP_CIPHER_CTX_reset</p>
 <p>对应的命令是</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/cleanup/reset/g</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">:%s/cleanup/reset/g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>再保存文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">:wq<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>之后继续正常启动shadowsocks.json，应该就会一切正常。</p>
 <p><strong>对于vultr还需停止防火墙服务（多敲几个命令）</strong>，这样才可以建立TCP连接，否则只能有ICMP连接。</p>
 <p>停止当前防火墙服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl stop firewalld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>禁用防火墙服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> firewalld.service</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl disable firewalld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>检查当前防火墙状态：输出not running时就可以正常使用了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">firewall-cmd --state<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="在Windows-MacOS下使用shadowsocks"><a href="#在Windows-MacOS下使用shadowsocks" class="headerlink" title="在Windows/MacOS下使用shadowsocks"></a>在Windows/MacOS下使用shadowsocks</h3><p>以上操作做都是通过SSH连接远程服务器进行配置，接下来需要从本地端进行配置。这时我们就可以使用图形化的界面更加方便的配置了。</p>
 <p>对于windows系统用户，从shadowosocks官方的GitHub <a target="_blank" rel="noopener" href="https://github.com/shadowsocks/shadowsocks-windows/releases">Releases</a>中下载zip文件并解压。对于版本号，我这里的是4.2.0.1，更新的版本号似乎去除了对aes-256-cfb的支持，所以这里建议选择老版本（新版本没折腾过，不敢打包票哈哈）。</p>
@@ -318,14 +343,14 @@
 <p>为啥Ubuntu这么特殊呢？嗯，因为连shadowsocks官方都把维护的qt5（一种linux上的可视化开发程序）版本的文件给remove了，所以在ubuntu上似乎很难找到一个较好的图形界面来配置。然后搜到的各种东西又都是让Ubuntu作为服务端来配置，本地端如何配置还真没几个人讲，大概大家Ubuntu都是用来跑程序，不科学上网的吧……</p>
 <p>我一度也是这样妥协的，直到两会期间连GitHub也被封了，我才下定决心让Ubuntu也要科学上网，否则我每次都必须把人家的代码fork到gitee上，然后对着gitee敲命令或者git clone，我嫌麻烦。（果然人类进步的源泉是懒2333）</p>
 <h3 id="使用terminal科学上网"><a href="#使用terminal科学上网" class="headerlink" title="使用terminal科学上网"></a>使用terminal科学上网</h3><p>虽然qt5挂掉了，但是shadowsocks官方的源还是封不掉的，所以首先在ubuntu本地安装shadowsocks：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> shadowsocks<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我这里会安装到2.9.0-2这个版本，并且电脑会认为这就是最新版了。不知道是确实没有新版本了还是说官方源并不再更新新版本了，但反正这个版本肯定也够了。</p>
 <p>随后配置shadowsocks的json文件，这里与之前在服务端的配置是类似的。。</p>
 <p>不要混淆，实际上我们这里是用json的方式完成了图形化界面的配置。所以这里json的文件实际上也可以被放在任何地方，这里以在/etc/shadowsocks/当中为例，然后我个人比较喜欢用文本编辑器编辑，那么命令就是：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/shadowsocks/config.json</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> gedit /etc/shadowsocks/config.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>复制<a href="#jumpjson">这里</a>修改好的json代码（如果你自己搭过梯子，那肯定也写过这东西）进去即可，保存后启动该文件即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -c /etc/shadowsocks/config.json</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sslocal -c /etc/shadowsocks/config.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这时打开浏览器你会发现，还是没有啥区别，访问Google还是上不去，百度还是很快，因为我们还需要<strong>设置Proxy代理</strong>。</p>
 <p><strong>注意，这个terminal先不要关掉！</strong></p>
 <p>你可能多少听说过Switchy Omega这个东西，然而在我白般尝试后发现它并不支持SOCKS5代理，遂放弃。转而一番查询后发现，火狐可以完美支持SOCKS5的proxy诶，然后我就去下了个火狐浏览器（甚至许多人预装Ubuntu都会自带火狐浏览器吧）</p>
@@ -343,10 +368,15 @@
 <p>答案当然是可以的。</p>
 <p>一般来讲，自启动的文件都被放置在<code>~/.config/autostart</code>这样一个路径中。所以我们可以在其中建立一个.desktop文件，让其伪装成一个快捷方式，这样就可以让系统开机自启动。</p>
 <p>这里假设文件名就叫shadowsocks.desktop，同样使用文本编辑器打开：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.config/autostart/shadowsocks.desktop</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> gedit ~/.config/autostart/shadowsocks.desktop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在其中输入以下配置：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=shadowsocks</span><br><span class="line">Exec=sslocal -c /etc/shadowsocks/config.json</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">X-GNOME-Autostart-enabled=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token punctuation">[</span>Desktop Entry<span class="token punctuation">]</span>
+Type<span class="token operator">=</span>Application
+Name<span class="token operator">=</span>shadowsocks
+Exec<span class="token operator">=</span>sslocal <span class="token operator">-</span>c <span class="token operator">/</span>etc<span class="token operator">/</span>shadowsocks<span class="token operator">/</span>config<span class="token punctuation">.</span>json
+Terminal<span class="token operator">=</span><span class="token boolean">false</span>
+X<span class="token operator">-</span>GNOME<span class="token operator">-</span>Autostart<span class="token operator">-</span>enabled<span class="token operator">=</span><span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <div align=center><img width = 90% src ="https://i.loli.net/2021/05/18/wgTOo1sjzQrGD4k.png"/></div>
 
@@ -358,7 +388,8 @@
 <p>以及如果你有余力，也可以把这个代理设置到全局，但我觉得这个要调整的就太多了，而且全局也并不一定真的有多好，就没有往下折腾了。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>所以实际上我这是一种阉割版的“Ubuntu”实现科学上网。因为我没有设置全局代理，如果git clone，或者pip、conda install什么的，走的还是本地网络，而这些东西是也很有可能间歇性挂掉的。不过我这算是一种折中吧，大部分包基本该下的都下过，都有缓存了，我这里只是希望能够安心地看GitHub，以及可能会用到YouTube看一些演示视频或者教程，debug时遇到Stack Overflow也不至于完全挂掉。</p>
 <p>而且这好像也<strong>给Firefox找到了存在的意义</strong>。以前总有人倡导，大家装了Ubuntu不要卸载firefox，否则把Chrome搞的一家独大了、寡头垄断了不好。现在从VPN代理的角度来讲，Firefox还是比Chrome方便多了，所以它值得出现在我的Favorite之中。</p>
-<h2 id="小福利"><a href="#小福利" class="headerlink" title="小福利"></a>小福利</h2><p>最近偶然找到了一个很好的PyTorch教程，这让我这个日常不上YouTube的用户找到了一丢丢上YouTube的理由。在这儿推荐给大家：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p> 小福利</p>
+<p>最近偶然找到了一个很好的PyTorch教程，这让我这个日常不上YouTube的用户找到了一丢丢上YouTube的理由。在这儿推荐给大家：</p>
 <p>课程主页：<a target="_blank" rel="noopener" href="https://deeplizard.com/learn/playlist/PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">deeplizard</a>（对应有视频内容的文字教程）<br>视频列表（需翻墙）：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">YouTube</a><br>视频列表（搬运版本）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eK411u7KQ?from=search&seid=13637531933091619180">bilibili</a>（我这里选择的是无字幕版本）</p>
 <p>正好可以拿这个链接测试下翻墙效果哦~</p>
 
@@ -403,10 +434,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-04-02 02:03:03 / 修改时间：11:25:43" itemprop="dateCreated datePublished" datetime="2021-04-02T02:03:03+08:00">2021-04-02</time>
+              <time title="创建时间：2021-04-02 02:03:03" itemprop="dateCreated datePublished" datetime="2021-04-02T02:03:03+08:00">2021-04-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 15:11:38" itemprop="dateModified" datetime="2021-05-19T15:11:38+08:00">2021-05-19</time>
+              </span>
 
           
 
@@ -419,8 +456,132 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3><p><a target="_blank" rel="noopener" href="https://www.baidu.com/">链接</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">foo</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;这是一段测试代码&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3><p><a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a></p>
+<p>测试bash代码：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console.log<span class="token punctuation">(</span><span class="token string">'这是一段测试代码'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>测试C++代码：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">10010</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> num<span class="token punctuation">,</span> time<span class="token punctuation">,</span> numtime<span class="token punctuation">,</span> dmax <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> cntmax <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//n为输入行数，num为满足题意结点，time为遍历次数，numtime为满足题意的遍历次数</span>
+<span class="token comment">//dmax记录遍历过程中满足题意的最大深度，cntmax为最大子结点数</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">,</span> depth<span class="token punctuation">;</span>
+    node <span class="token operator">*</span>lchild<span class="token punctuation">,</span> <span class="token operator">*</span>mchild<span class="token punctuation">,</span> <span class="token operator">*</span>rchild<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> node<span class="token operator">*</span><span class="token operator">></span> m<span class="token punctuation">;</span> <span class="token comment">//使用map建立结点数字与结点指针的映射</span>
+
+node<span class="token operator">*</span> <span class="token function">newnode</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//如果输入值为-1，则返回空指针</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    node<span class="token operator">*</span> root <span class="token operator">=</span> <span class="token keyword">new</span> node<span class="token punctuation">;</span>
+    root<span class="token operator">-></span>data <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    root<span class="token operator">-></span>lchild <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    root<span class="token operator">-></span>mchild <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    root<span class="token operator">-></span>rchild <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">preOrder</span><span class="token punctuation">(</span>node<span class="token operator">*</span> root<span class="token punctuation">,</span> <span class="token keyword">int</span> d<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//前序遍历输入根节点和深度</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    root<span class="token operator">-></span>depth <span class="token operator">=</span> d<span class="token punctuation">;</span>
+    time<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">-></span>lchild <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">-></span>mchild <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">-></span>rchild <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cnt <span class="token operator">>=</span> cntmax <span class="token operator">&amp;&amp;</span> d <span class="token operator">></span> dmax<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        dmax <span class="token operator">=</span> d<span class="token punctuation">;</span>
+        cntmax <span class="token operator">=</span> cnt<span class="token punctuation">;</span>
+        num <span class="token operator">=</span> root<span class="token operator">-></span>data<span class="token punctuation">;</span>
+        numtime <span class="token operator">=</span> time<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">preOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>lchild<span class="token punctuation">,</span> d <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">preOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>mchild<span class="token punctuation">,</span> d <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">preOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>rchild<span class="token punctuation">,</span> d <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n1<span class="token punctuation">,</span> n2<span class="token punctuation">,</span> n3<span class="token punctuation">,</span> n4<span class="token punctuation">;</span>
+    node<span class="token operator">*</span> root<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d %d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n2<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n3<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            root <span class="token operator">=</span> <span class="token function">newnode</span><span class="token punctuation">(</span>n1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m<span class="token punctuation">[</span>n1<span class="token punctuation">]</span> <span class="token operator">=</span> root<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        node<span class="token operator">*</span> rtemp <span class="token operator">=</span> m<span class="token punctuation">[</span>n1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        rtemp<span class="token operator">-></span>lchild <span class="token operator">=</span> <span class="token function">newnode</span><span class="token punctuation">(</span>n2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        rtemp<span class="token operator">-></span>mchild <span class="token operator">=</span> <span class="token function">newnode</span><span class="token punctuation">(</span>n3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        rtemp<span class="token operator">-></span>rchild <span class="token operator">=</span> <span class="token function">newnode</span><span class="token punctuation">(</span>n4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        m<span class="token punctuation">[</span>n2<span class="token punctuation">]</span> <span class="token operator">=</span> rtemp<span class="token operator">-></span>lchild<span class="token punctuation">;</span>
+        m<span class="token punctuation">[</span>n3<span class="token punctuation">]</span> <span class="token operator">=</span> rtemp<span class="token operator">-></span>mchild<span class="token punctuation">;</span>
+        m<span class="token punctuation">[</span>n4<span class="token punctuation">]</span> <span class="token operator">=</span> rtemp<span class="token operator">-></span>rchild<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">preOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d %d\n"</span><span class="token punctuation">,</span> num<span class="token punctuation">,</span> numtime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>测试python代码</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+
+<span class="token keyword">def</span> <span class="token function">cal_value</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x_decimal <span class="token operator">=</span> x <span class="token operator">-</span> np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    y_decimal <span class="token operator">=</span> y <span class="token operator">-</span> np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+    x_base <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    y_base <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> x_decimal <span class="token operator">==</span> <span class="token number">0</span> <span class="token keyword">and</span> y_decimal <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment"># 若为整数点，直接返回对应数值</span>
+        value <span class="token operator">=</span> f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span>
+    <span class="token keyword">elif</span> x_decimal <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment"># 退化为y方向单线性插值</span>
+        value <span class="token operator">=</span> f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> y_decimal<span class="token punctuation">)</span> <span class="token operator">+</span> f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> y_decimal
+    <span class="token keyword">elif</span> y_decimal <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token comment"># 退化为x方向单线性插值</span>
+        value <span class="token operator">=</span> f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> x_decimal<span class="token punctuation">)</span> <span class="token operator">+</span> f<span class="token punctuation">[</span>x_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span> <span class="token operator">*</span> x_decimal
+
+    <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token comment"># 执行双线性插值，value = L*C*R^T</span>
+        L <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token operator">-</span> x_decimal<span class="token punctuation">,</span> x_decimal<span class="token punctuation">]</span>
+        C <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>x_base<span class="token punctuation">]</span><span class="token punctuation">[</span>y_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+             <span class="token punctuation">[</span>f<span class="token punctuation">[</span>x_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>y_base<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>x_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>y_base <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        R <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token operator">-</span> y_decimal<span class="token punctuation">,</span> y_decimal<span class="token punctuation">]</span>
+        value <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>L<span class="token punctuation">,</span> C<span class="token punctuation">)</span><span class="token punctuation">,</span> R<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token builtin">int</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span><span class="token builtin">round</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 定义原始图像的尺寸为src_x*src_y，现希望将其插值为tar_x*tar_y</span>
+<span class="token keyword">def</span> <span class="token function">bilinear_interpolate</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> tar_x<span class="token punctuation">,</span> tar_y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x_proj <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> tar_x<span class="token punctuation">)</span>
+    y_proj <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> tar_y<span class="token punctuation">)</span>
+    temp_img <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> x_proj<span class="token punctuation">:</span>
+        temp_row <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> y_proj<span class="token punctuation">:</span>
+            temp_rgb <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+            <span class="token keyword">for</span> k <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                value <span class="token operator">=</span> cal_value<span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> img<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> k<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                temp_rgb<span class="token punctuation">.</span>append<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+            temp_row<span class="token punctuation">.</span>append<span class="token punctuation">(</span>temp_rgb<span class="token punctuation">)</span>
+        temp_img<span class="token punctuation">.</span>append<span class="token punctuation">(</span>temp_row<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> temp_img
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    img <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'Lenna.png'</span><span class="token punctuation">)</span>
+    img <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+    img_new <span class="token operator">=</span> bilinear_interpolate<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span>
+    img_new <span class="token operator">=</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">(</span>np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>img_new<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    img <span class="token operator">=</span> Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>img_new<span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
       
     </div>
 
@@ -478,16 +639,16 @@
 
       
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
@@ -581,7 +742,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/Muyiyunzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Muyiyunzi" rel="noopener" target="_blank">GitHub</a>
+        <a href="https://github.com/Muyiyunzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Muyiyunzi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
   </div>
 

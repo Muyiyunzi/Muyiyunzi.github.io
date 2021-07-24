@@ -223,7 +223,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-07-24 18:59:12 / 修改时间：20:32:29" itemprop="dateCreated datePublished" datetime="2021-07-24T18:59:12+08:00">2021-07-24</time>
+      <time title="创建时间：2021-07-24 18:59:12 / 修改时间：20:38:09" itemprop="dateCreated datePublished" datetime="2021-07-24T18:59:12+08:00">2021-07-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,124 +283,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
-
-<h2 id="SSH连接服务器"><a href="#SSH连接服务器" class="headerlink" title="SSH连接服务器"></a>SSH连接服务器</h2><p>通过SSH连接一个账户为user的一个最简单的命令是：</p>
+          <h2 id="SSH连接服务器"><a href="#SSH连接服务器" class="headerlink" title="SSH连接服务器"></a>SSH连接服务器</h2><p>通过SSH连接一个账户为user的一个最简单的命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@***.**.**.**</span><br></pre></td></tr></table></figure>
 <p>其中，@前面的是<strong>用户名</strong>，一般来讲管理员账户是user，后面是ip地址，这里我就隐去了。注意这里默认了SSH的端口是22。</p>
 <p>如果你使用局域网，只需要在服务器上<code>ifconfig</code>一下，得到局域网ip地址(192.168.1.***)，进行SSH连接即可；一般我们会做穿透，具体过程不做展开，大致可以理解为租用一个服务器作为映射的跳板。总之会获得一个公网的ip地址和端口号，所以一个更全面的命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 29999:127.0.0.1:6006 -p ***** user@***.**.**.**</span><br></pre></td></tr></table></figure>
 <p>这里-L表示本地地址端口号映射，由于tensorboard默认是在6006端口，SSH又没有图形界面，所以我只要在本地浏览器上访问127.0.0.1:29999，就会相当于在服务器上访问127.0.0.1:6006，就可以看到tensorboard的内容了。</p>
 <p>-p后面跟的内容是映射后的端口号，这样也会一定程度上减少公网上对于SSH的攻击。</p>
-<h2 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h2><p>一般地，user用户具有最高权限，只对管理员开放使用；实验室每个人使用都会建立自己的账号，这样互相之间的使用不会冲突。建立的过程大致如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -r -m -s /bin/bash fjn</span><br></pre></td></tr></table></figure>
-<p>其中<br>-r：建立系统账号（这里似乎加不加上都问题不大？）<br>-m：自动建立用户的登入目录<br>-s：指定用户登入后所使用的shell，后面参数为路径。我这里就用bash了，也可以使用zsh什么的。</p>
-<p>fjn就是用户名啦，下同~</p>
-<div align=center><img width = 80% src ="https://i.loli.net/2021/07/09/rcRLfB9KwvVd1Zg.png"/></div>
-
-<p>通过<code>ls /home/</code>可以看到已经自动创建了用户文件夹。</p>
-<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p>这个用户创建完之后密码可以认为是随机的，所以如果你直接<code>sudo su fjn</code>的话（这里su的意思是switch user，切换用户），会很尴尬，因为切换过去就切不回来了（再切回来需要新账户的密码），只能原地exit……</p>
-<p>所以这里需要进一步修改新用户的密码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd fjn</span><br></pre></td></tr></table></figure>
-
-<div align=center><img width = 50% src ="https://i.loli.net/2021/07/09/PmiK13vXqblkLCd.png"/></div>
-
-<p>重复输入一遍设定的密码后，便设置完成。公网ip的话尽量还是设置的强一点，不要搞什么1啊123之类的这种很快就会被破译掉，我们实验室以前是出过这种事情的，被人黑进来，kill掉你的所有进程，然后执行挖矿程序……</p>
-<p><del>可惜不太懂挖矿，要不我就把钱包账户改成我自己的了</del></p>
-<h2 id="修改用户权限"><a href="#修改用户权限" class="headerlink" title="修改用户权限"></a>修改用户权限</h2><p>就差一步我们就要大功告成啦，我们还要赋予新用户一些权限。如果不做这个操作的话，新用户是无法使用sudo命令的。也就是说<code>sudo apt install</code>之类的命令我们都用不了，那肯定是不行的。</p>
-<p>sudo的权限控制被设置在<code>/etc/sudoers</code>这个文件中。网上许多野鸡博客都会让你对这个文件<code>chmod</code>，这些虽然在结果上也会达到效果，但是多少有些野鸡，因为如果你<code>sudo vi /etc/sudoers</code>的话，它在一开头就赫然写着：</p>
-<div align=center><img width = 90% src ="https://i.loli.net/2021/07/09/SbXYxNHDCUO8rvL.png"/></div>
-
-<p><strong>This file MUST be edited with the ‘visudo’ command as root.</strong></p>
-<p>就算你要用vi，文件也建议了你去修改<code>/etc/sudoers.d</code>这个文件。所以正确的做法应该是，先切换到root用户：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-<p>然后通过visudo命令进行修改，顾名思义就是修改sudo权限组嘛：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br></pre></td></tr></table></figure>
-<p>此时会以一个特殊的界面进入sudoers文件中，然后就可以对应的修改了。找到</p>
-<blockquote>
-<p><code># User privilege specification</code></p>
-</blockquote>
-<p>这一项，在root下面对应地照抄，把root改成用户名即可，如图所示：</p>
-<div align=center><img width = 90% src ="https://i.loli.net/2021/07/09/Q5rnHA7yeuNSUYp.png"/></div>
-
-<p>完成后按<code>X</code>退出，随后其会询问”Save modified buffer?”，这时按<code>y</code>；然后又会询问文件存储地址，这时候直接<code>回车</code>就好了。</p>
-<p>此时，便可以输入<code>exit</code>退出重新连接了。</p>
-<h2 id="重新登陆"><a href="#重新登陆" class="headerlink" title="重新登陆"></a>重新登陆</h2><p>配置完毕后便可以用自己的账号登陆了（注意用户名处变更）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 29999:127.0.0.1:6006 -p ***** fjn@***.**.**.**</span><br></pre></td></tr></table></figure>
-
-<p>再输入<code>pwd</code>即可看到当前绝对路径地址，系统已经自动为你建好了用户路径：</p>
-<div align=center><img width = 80% src ="https://i.loli.net/2021/07/10/biUCzdgE4chPMF9.png"/></div>
-
-<h2 id="Anaconda的使用"><a href="#Anaconda的使用" class="headerlink" title="Anaconda的使用"></a>Anaconda的使用</h2><h3 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h3><p>Anaconda是一个很好的包管理软件。其软件安装包可以在<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&O=D">清华大学开源软件镜像站</a>找到，所给链接已经将之按时间降序排列。</p>
-<p>我们可以在本地主机上访问镜像站，获取链接后再在服务器上wget下载。这里找到适合自己服务器架构的安装包，一般来讲是Linux x86_64之类的</p>
-<div align=center><img width = 90% src ="https://i.loli.net/2021/07/10/kBq1Cae3pIMhrLH.png"/></div>
-
-<p>右键复制链接地址后，在服务器中wget，比如我这里是2021.05的版本，如不介意最新版本也可以直接复制粘贴以下链接：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后就是bash安装的过程了，大致就是（注意可以tab补全）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<p>长按Enter（<del>阅读</del>条款）→yes（同意条款）→Enter（默认路径即可）→yes（要conda init）</p>
-<p>初次使用的话要（在<code>~</code>的路径下）source一下就可以了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bashrc</span><br></pre></td></tr></table></figure>
-
-<h3 id="增加channel"><a href="#增加channel" class="headerlink" title="增加channel"></a>增加channel</h3><p>我感觉这一点很多朋友都不太清楚。我们知道，conda search可以查询一些包的版本情况，比如我们查询tensorflow-gpu的版本情况：</p>
-<div align=center><img width = 70% src ="https://i.loli.net/2021/07/15/46XNRdqBcfjD8uY.png"/></div>
-
-<p>可以看到，这里其实是没有1.2，1.3之类的版本的，但很多repo当中确实是使用的这几个版本，这时就需要设置更多的channel了。通过这个命令可以查询当前的通道都有哪些：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --show channels</span><br></pre></td></tr></table></figure>
-<p>一般来讲，只会显示默认的defaults。按照网上的推荐，大家可以添加以下两个channel，基本上够用了（main有时候会挂掉，可以先只添加free的），如果有兴趣也可以查询更多的channel。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
-<p>添加完成后，可以再输入<code>conda config --show channels</code>以明确添加了以上通道。再进行搜索，可以看到有了更多的tensorflow-gpu版本：</p>
-<div align=center><img width = 70% src ="https://i.loli.net/2021/07/15/cOCjaZsbSAgFhNl.png
-"/></div>
-
-<p>总之，添加完成后，首先该搜到的包都还搜得到，原来搜不到的可能也会搜得到，也增加了anaconda服务器挂掉 <del>（特殊时期）</del> 时候的鲁棒性。</p>
-<p>如果出现HTTP error时也可以通过将<code>add</code>改为<code>remove</code>的命令删除通道。</p>
-<h2 id="bypy的使用"><a href="#bypy的使用" class="headerlink" title="bypy的使用"></a>bypy的使用</h2><p>由于没有图形界面，所以下数据集的话会有一点麻烦（除非你找到国内的镜像源地址），而如果使用scp命令传文件的话基本只有2、3M/s，会成为带宽瓶颈，这时就可以使用百度网盘这个神器，我这里大概是10M/s左右的速度。</p>
-<p>当然了，这得益于我有在百度网盘中收集储存数据集的习惯（实验室比较惨没有NAS，也没个ftp），如果没有这儿习惯的话，再增加一步上传操作时间就会增加，可能直接scp一步到位会是更好些的选择吧。</p>
-<h3 id="关联账户"><a href="#关联账户" class="headerlink" title="关联账户"></a>关联账户</h3><p>初次使用请先安装（可以在conda环境的base中）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install bypy</span><br></pre></td></tr></table></figure>
-
-<p>认证信息：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy info</span><br></pre></td></tr></table></figure>
-
-<p>然后terminal中会给出一个网址链接，这个链接，我们在登陆了要绑定的百度网盘网页中打开它，就会得到一串验证码，我们需要把这个验证码复制回terminal中，以完成绑定，如下所示：</p>
-<div align=center><img width = 100% src ="https://i.loli.net/2021/07/12/6hmQiUPB7xe59KZ.png"/></div>
-
-<p>这个认证会随网络情况波动，可能很快也可能很久，我都经历过。认证成功后会显示Quota和Used。</p>
-<p>然后你就会看到百度网盘里面出现了一个文件夹叫“我的应用数据”，然后里面有一个文件夹叫“bypy”，而这被视为是bypy的根路径，比如你在这个文件夹里有一个文件x，我们想要操作这个文件的话路径就直接是x。</p>
-<div align=center><img width = 70% src ="https://i.loli.net/2021/07/12/jmfrZCYOuJ3TA4d.png"/></div>
-
-<p>比较蛋疼的是，我试了上级路径（<code>../</code>）似乎是失效的，所以可能需要把要交互的文件夹都放在bypy这个文件夹下才行。</p>
-<p>通过bypy list可以看到当前路径下的文件情况，D表示目录(directory?)，F表示文件(file?)，比如刚刚截图中的文件情况就会被反映成下面这样：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
-<div align=center><img width =90% src ="https://i.loli.net/2021/07/12/SHIOjsc7DmCBYpl.png"/></div>
-
-<h3 id="文件交互"><a href="#文件交互" class="headerlink" title="文件交互"></a>文件交互</h3><p>使用<code>downfile</code>下载单个文件；<br>使用<code>downdir</code>下载文件夹;<br>使用<code>upload</code>上传文件/文件夹;<br>关于这些交互命令的使用，其实可以直接<code>bypy --help</code>来获取更多信息。</p>
-<p>所以我在这里举个栗子就都懂了。比如我要下载vkitti.7z这个文件，命令就应该是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy downfile vkitti<span class="number">.7</span>z</span><br></pre></td></tr></table></figure>
-
-<p>比如需要下载KITTI-raw这个文件夹，那就是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy downdir KITTI-raw</span><br></pre></td></tr></table></figure>
-
-<p>似乎这两个命令都可以被<code>download</code>一个替代，有好事者可以测试一下；</p>
-<p>上传的话一般用不到，我能想到的使用场景就是传输一些pth文件。你可以选择在命令中指明文件，如果不指明则默认上传当前目录下全部文件，例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy upload (xxx)</span><br></pre></td></tr></table></figure>
-
-<p><strong>划重点：<code>--downloader</code>这个参数非常有用，使用aria2之类的下载器可以飚到很高的速度</strong>，所以一般来讲命令如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bypy --downloader aria2 downfile vkitti<span class="number">.7</span>z</span><br></pre></td></tr></table></figure>
-
-<p>不过需要提前安装下载器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install aria2</span><br></pre></td></tr></table></figure>
-
-<p>这回测试，速度居然可以飙到17M/s，不过平均来讲速度基本在10M左右，已经很不错了，一个16G的数据集大概20分钟左右就能下完了。</p>
-<div align=center><img width =90% src ="https://i.loli.net/2021/07/12/LCBuHGNd8AhaI3f.png"/></div>
-
-
-
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/24/server/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

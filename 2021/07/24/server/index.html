@@ -20,25 +20,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="In me the tiger sniffs the rose.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="慕弋云子">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="SSH连接服务器通过SSH连接一个账户为user的一个最简单的命令是： 1ssh user@***.**.**.** 其中，@前面的是用户名，一般来讲管理员账户是user，后面是ip地址，这里我就隐去了。注意这里默认了SSH的端口是22。 如果你使用局域网，只需要在服务器上ifconfig一下，得到局域网ip地址(192.168.1.***)，进行SSH连接即可；一般我们会做穿透，具体过程不做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【记录】服务器使用">
+<meta property="og:url" content="http://example.com/2021/07/24/server/index.html">
 <meta property="og:site_name" content="慕弋云子">
-<meta property="og:description" content="In me the tiger sniffs the rose.">
+<meta property="og:description" content="SSH连接服务器通过SSH连接一个账户为user的一个最简单的命令是： 1ssh user@***.**.**.** 其中，@前面的是用户名，一般来讲管理员账户是user，后面是ip地址，这里我就隐去了。注意这里默认了SSH的端口是22。 如果你使用局域网，只需要在服务器上ifconfig一下，得到局域网ip地址(192.168.1.***)，进行SSH连接即可；一般我们会做穿透，具体过程不做">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-24T10:59:12.000Z">
+<meta property="article:modified_time" content="2021-07-24T12:27:10.834Z">
 <meta property="article:author" content="Muyiyunzi">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/07/24/server/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/07/24/server/","path":"2021/07/24/server/","title":"【记录】服务器使用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>慕弋云子</title>
+<title>【记录】服务器使用 | 慕弋云子</title>
   
 
 
@@ -106,7 +108,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -119,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">SSH连接服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="nav-number">1.2.</span> <span class="nav-text">创建新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90"><span class="nav-number">1.4.</span> <span class="nav-text">修改用户权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%99%BB%E9%99%86"><span class="nav-number">1.5.</span> <span class="nav-text">重新登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anaconda%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">Anaconda的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Anaconda"><span class="nav-number">1.6.1.</span> <span class="nav-text">安装Anaconda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0channel"><span class="nav-number">1.6.2.</span> <span class="nav-text">增加channel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bypy%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.7.</span> <span class="nav-text">bypy的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E8%B4%A6%E6%88%B7"><span class="nav-number">1.7.1.</span> <span class="nav-text">关联账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%BA%A4%E4%BA%92"><span class="nav-number">1.7.2.</span> <span class="nav-text">文件交互</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,16 +191,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/24/server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -210,9 +214,9 @@
       <meta itemprop="name" content="慕弋云子">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/24/server/" class="post-title-link" itemprop="url">【记录】服务器使用</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          【记录】服务器使用
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -227,6 +231,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
   
   <span class="post-meta-item">
     
@@ -274,7 +285,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
+        <span id="more"></span>
 
 <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="SSH连接服务器"><a href="#SSH连接服务器" class="headerlink" title="SSH连接服务器"></a>SSH连接服务器</h2><p>通过SSH连接一个账户为user的一个最简单的命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@***.**.**.**</span><br></pre></td></tr></table></figure>
@@ -392,7 +403,6 @@
 
 
 
-      
     </div>
 
     
@@ -400,379 +410,53 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/18/network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jfif">
-      <meta itemprop="name" content="Muyiyunzi">
-      <meta itemprop="description" content="In me the tiger sniffs the rose.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="慕弋云子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/18/network/" class="post-title-link" itemprop="url">【记录】在Ubuntu上实现科学上网</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-18 17:22:37" itemprop="dateCreated datePublished" datetime="2021-05-18T17:22:37+08:00">2021-05-18</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-24 20:01:19" itemprop="dateModified" datetime="2021-07-24T20:01:19+08:00">2021-07-24</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">记录</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2021/05/18/network/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/2021/05/18/network/" data-xid="/2021/05/18/network/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/2021/05/18/network/" class="post-meta-item leancloud_visitors" data-flag-title="【记录】在Ubuntu上实现科学上网" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Muyiyunzi 微信">
+        <span>微信</span>
       </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>8.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h2><p>终于开始了博客之旅。</p>
-<p>从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。</p>
-<p>现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的兼容性不好，最终折中地选择了GitHub+markdown的这种方式。</p>
-<p>其实一直早就想写很多东西，比如三原色、田忌赛马等问题都用长图发在了朋友圈当中，还比如从去年就想写的《神奇的哥尼斯堡》，大概这和此篇一样都该被归为“杂文”之中；学术性的博客也很想写，从最早看机器学习、多视几何、ROS等，包括之后Parzen窗的理解等，就很想作为优质博客补充一下现在网络上的缺失；很多时候也应该停下来思考思考人生，写一写收获与感悟，所以总的来说内容可能会很杂——所以我也并不指望能有什么引流，或者一些学术文章可能会发在知乎上？总之也有许多问题没有想好，但总要先吃一次螃蟹再说，于是便有了此篇文章。</p>
-<p>工程性比较强，算是一种归档吧，以防日后自己忘了（毕竟在网上没有看到太多博客把着这个事情讲的很好）。当然，也或许是Ubuntu之间本身也会有体制差异，可能实验室这破电脑本身就不太行，所以才让我摸索了许久。</p>
-<p>下面进入正文。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/18/network/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/02/codetest/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jfif">
-      <meta itemprop="name" content="Muyiyunzi">
-      <meta itemprop="description" content="In me the tiger sniffs the rose.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="慕弋云子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/02/codetest/" class="post-title-link" itemprop="url">渲染测试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-02 02:03:03" itemprop="dateCreated datePublished" datetime="2021-04-02T02:03:03+08:00">2021-04-02</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-24 20:05:45" itemprop="dateModified" datetime="2021-07-24T20:05:45+08:00">2021-07-24</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">记录</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2021/04/02/codetest/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/2021/04/02/codetest/" data-xid="/2021/04/02/codetest/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/2021/04/02/codetest/" class="post-meta-item leancloud_visitors" data-flag-title="渲染测试" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
+      <div>
+        <img src="/images/alipay.png" alt="Muyiyunzi 支付宝">
+        <span>支付宝</span>
       </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
+
+  </div>
 </div>
 
-        </div>
-      </header>
+          
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="本文用于测试博客显示"><a href="#本文用于测试博客显示" class="headerlink" title="本文用于测试博客显示"></a>本文用于测试博客显示</h1><h2 id="markdown渲染测试"><a href="#markdown渲染测试" class="headerlink" title="markdown渲染测试"></a>markdown渲染测试</h2><p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em><br><em><strong>这是斜体加粗的文字</strong></em><br><del>这是加删除线的文字</del><br>超链接：<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/02/codetest/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Muyiyunzi
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/07/24/server/" title="【记录】服务器使用">http://example.com/2021/07/24/server/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jfif">
-      <meta itemprop="name" content="Muyiyunzi">
-      <meta itemprop="description" content="In me the tiger sniffs the rose.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="慕弋云子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-01 19:00:00" itemprop="dateCreated datePublished" datetime="2021-04-01T19:00:00+08:00">2021-04-01</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-24 20:05:50" itemprop="dateModified" datetime="2021-07-24T20:05:50+08:00">2021-07-24</time>
-      </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2021/04/01/hello-world/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/2021/04/01/hello-world/" data-xid="/2021/04/01/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/2021/04/01/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>367</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/01/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/18/network/" rel="prev" title="【记录】在Ubuntu上实现科学上网">
+                  <i class="fa fa-chevron-left"></i> 【记录】在Ubuntu上实现科学上网
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
@@ -781,6 +465,8 @@
 
 
 
+
+    <div class="comments" id="waline-comments"></div>
 </div>
   </main>
 
@@ -855,7 +541,7 @@
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/2021/07/24/server/"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.waline.el).then(() => 

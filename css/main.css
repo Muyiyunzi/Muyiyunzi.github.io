@@ -1330,21 +1330,16 @@ pre code {
 .site-author-name {
   color: var(--text-color);
   font-weight: 600;
+  font-size: 1.4125em;
   margin: 0;
 }
 .site-description {
   color: #999;
-  font-size: 0.8125em;
+  font-size: 1.0125em;
   margin-top: 0;
 }
 .links-of-author a {
   font-size: 0.8125em;
-}
-.links-of-author .fa,
-.links-of-author .fab,
-.links-of-author .far,
-.links-of-author .fas {
-  margin-right: 2px;
 }
 .sidebar .sidebar-button:not(:first-child) {
   margin-top: 15px;
@@ -1366,6 +1361,7 @@ pre code {
 .sidebar .sidebar-button button .fab,
 .sidebar .sidebar-button button .far,
 .sidebar .sidebar-button button .fas {
+  size: 5px;
   margin-right: 5px;
 }
 .links-of-blogroll {
@@ -1681,9 +1677,6 @@ pre code {
 .back-to-top {
   font-size: 12px;
 }
-.back-to-top span {
-  display: none;
-}
 .back-to-top {
   bottom: -100px;
   box-sizing: border-box;
@@ -1696,7 +1689,6 @@ pre code {
   position: fixed;
   z-index: 1300;
   right: 30px;
-  width: 24px;
 }
 @media (max-width: 991px) {
   .back-to-top {
@@ -2026,9 +2018,10 @@ pre code {
   text-align: center;
 }
 .posts-expand .post-title {
-  font-size: 1.5em;
+  font-size: 2.3em;
   font-weight: normal;
   margin: initial;
+  margin-bottom: 10px;
   overflow-wrap: break-word;
 }
 .posts-expand .post-title-link {
@@ -2674,7 +2667,6 @@ ul.breadcrumb li:last-child {
 }
 .links-of-author-item {
   margin: 5px 0 0;
-  width: 50%;
 }
 .links-of-author-item a {
   box-sizing: border-box;

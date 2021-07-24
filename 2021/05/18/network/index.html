@@ -20,25 +20,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="In me the tiger sniffs the rose.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="慕弋云子">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="先扯几句终于开始了博客之旅。 从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。 现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【记录】在Ubuntu上实现科学上网">
+<meta property="og:url" content="http://example.com/2021/05/18/network/index.html">
 <meta property="og:site_name" content="慕弋云子">
-<meta property="og:description" content="In me the tiger sniffs the rose.">
+<meta property="og:description" content="先扯几句终于开始了博客之旅。 从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。 现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-18T09:22:37.000Z">
+<meta property="article:modified_time" content="2021-07-24T06:16:42.284Z">
 <meta property="article:author" content="Muyiyunzi">
+<meta property="article:tag" content="VPS服务">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="shadowsocks">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/05/18/network/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/05/18/network/","path":"2021/05/18/network/","title":"【记录】在Ubuntu上实现科学上网"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>慕弋云子</title>
+<title>【记录】在Ubuntu上实现科学上网 | 慕弋云子</title>
   
 
 
@@ -106,7 +111,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -119,6 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%89%AF%E5%87%A0%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">先扯几句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Windows-MacOS%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">2.</span> <span class="nav-text">使用VPS服务实现Windows&#x2F;MacOS科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFVPS%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text">什么是VPS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">2.2.</span> <span class="nav-text">如何配置科学上网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8CentOS-8%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BAshadowsocks"><span class="nav-number">2.3.</span> <span class="nav-text">在CentOS 8系统下搭建shadowsocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Windows-MacOS%E4%B8%8B%E4%BD%BF%E7%94%A8shadowsocks"><span class="nav-number">2.4.</span> <span class="nav-text">在Windows&#x2F;MacOS下使用shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8VPS%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0Ubuntu%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.</span> <span class="nav-text">使用VPS服务实现Ubuntu科学上网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8terminal%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.1.</span> <span class="nav-text">使用terminal科学上网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E7%8E%B0%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="nav-number">3.2.</span> <span class="nav-text">开机自启动实现科学上网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%A6%8F%E5%88%A9"><span class="nav-number">5.</span> <span class="nav-text">小福利</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,16 +194,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/18/network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -210,9 +217,9 @@
       <meta itemprop="name" content="慕弋云子">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/18/network/" class="post-title-link" itemprop="url">【记录】在Ubuntu上实现科学上网</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          【记录】在Ubuntu上实现科学上网
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -273,7 +280,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h2><p>终于开始了博客之旅。</p>
+        <h2 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h2><p>终于开始了博客之旅。</p>
 <p>从最早写公众号，到后来写$\LaTeX$，到现在使用GitHub静态托管页面拥有自己的“博客”，反倒是有些返璞归真，让我想到了自己小时候真·灌水论坛的日子。</p>
 <p>现在终于具有了些许自主性。比如「科学上网」这种话题，肯定就不能写在公众号上；而且就前几年的公众号体验来讲，输入公式和排版，以及代码框的体验，肯定不如markdown和latex来的舒服；而latex又和html的兼容性不好，最终折中地选择了GitHub+markdown的这种方式。</p>
 <p>其实一直早就想写很多东西，比如三原色、田忌赛马等问题都用长图发在了朋友圈当中，还比如从去年就想写的《神奇的哥尼斯堡》，大概这和此篇一样都该被归为“杂文”之中；学术性的博客也很想写，从最早看机器学习、多视几何、ROS等，包括之后Parzen窗的理解等，就很想作为优质博客补充一下现在网络上的缺失；很多时候也应该停下来思考思考人生，写一写收获与感悟，所以总的来说内容可能会很杂——所以我也并不指望能有什么引流，或者一些学术文章可能会发在知乎上？总之也有许多问题没有想好，但总要先吃一次螃蟹再说，于是便有了此篇文章。</p>
@@ -451,7 +458,6 @@
 <p>课程主页：<a target="_blank" rel="noopener" href="https://deeplizard.com/learn/playlist/PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">deeplizard</a>（对应有视频内容的文字教程）<br>视频列表（需翻墙）：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG">YouTube</a><br>视频列表（搬运版本）：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eK411u7KQ?from=search&seid=13637531933091619180">bilibili</a>（我这里选择的是无字幕版本）</p>
 <p>正好可以拿这个链接测试下翻墙效果哦~</p>
 
-      
     </div>
 
     
@@ -459,249 +465,40 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/02/codetest/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jfif">
-      <meta itemprop="name" content="Muyiyunzi">
-      <meta itemprop="description" content="In me the tiger sniffs the rose.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="慕弋云子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/02/codetest/" class="post-title-link" itemprop="url">渲染测试</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-02 02:03:03" itemprop="dateCreated datePublished" datetime="2021-04-02T02:03:03+08:00">2021-04-02</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-24 14:06:19" itemprop="dateModified" datetime="2021-07-24T14:06:19+08:00">2021-07-24</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">记录</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2021/04/02/codetest/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/2021/04/02/codetest/" data-xid="/2021/04/02/codetest/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/2021/04/02/codetest/" class="post-meta-item leancloud_visitors" data-flag-title="渲染测试" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="本文用于测试博客显示"><a href="#本文用于测试博客显示" class="headerlink" title="本文用于测试博客显示"></a>本文用于测试博客显示</h1><h2 id="markdown渲染测试"><a href="#markdown渲染测试" class="headerlink" title="markdown渲染测试"></a>markdown渲染测试</h2><p><strong>这是加粗的文字</strong><br><em>这是倾斜的文字</em><br><em><strong>这是斜体加粗的文字</strong></em><br><del>这是加删除线的文字</del><br>超链接：<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a></p>
-<p>分割线</p>
-<hr>
-<hr>
-<hr>
-<hr>
-<p>测试表格：</p>
-<table>
-<thead>
-<tr>
-<th>表头</th>
-<th align="center">表头</th>
-<th align="right">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>靠左</td>
-<td align="center">居中</td>
-<td align="right">靠右</td>
-</tr>
-</tbody></table>
-<h2 id="代码语法高亮测试"><a href="#代码语法高亮测试" class="headerlink" title="代码语法高亮测试"></a>代码语法高亮测试</h2><ul>
-<li>测试bash代码：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">foo</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">&#x27;这是一段测试代码&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<div class="post-copyright">
 <ul>
-<li>测试C++代码：</li>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Muyiyunzi
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/05/18/network/" title="【记录】在Ubuntu上实现科学上网">http://example.com/2021/05/18/network/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10010</span>;</span><br><span class="line"><span class="keyword">int</span> n, num, time, numtime, dmax = <span class="number">-1</span>, cntmax = <span class="number">-1</span>;</span><br><span class="line"><span class="comment">//n为输入行数，num为满足题意结点，time为遍历次数，numtime为满足题意的遍历次数</span></span><br><span class="line"><span class="comment">//dmax记录遍历过程中满足题意的最大深度，cntmax为最大子结点数</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> data, depth;</span><br><span class="line">    node *lchild, *mchild, *rchild;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">map&lt;<span class="keyword">int</span>, node*&gt; m; <span class="comment">//使用map建立结点数字与结点指针的映射</span></span><br><span class="line"></span><br><span class="line"><span class="function">node* <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">-1</span>) &#123; <span class="comment">//如果输入值为-1，则返回空指针</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    node* root = <span class="keyword">new</span> node;</span><br><span class="line">    root-&gt;data = x;</span><br><span class="line">    root-&gt;lchild = <span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;mchild = <span class="literal">NULL</span>;</span><br><span class="line">    root-&gt;rchild = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(node* root, <span class="keyword">int</span> d)</span> </span>&#123; <span class="comment">//前序遍历输入根节点和深度</span></span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    root-&gt;depth = d;</span><br><span class="line">    time++;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;lchild != <span class="literal">NULL</span>) cnt++;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;mchild != <span class="literal">NULL</span>) cnt++;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;rchild != <span class="literal">NULL</span>) cnt++;</span><br><span class="line">    <span class="keyword">if</span>(cnt &gt;= cntmax &amp;&amp; d &gt; dmax) &#123;</span><br><span class="line">        dmax = d;</span><br><span class="line">        cntmax = cnt;</span><br><span class="line">        num = root-&gt;data;</span><br><span class="line">        numtime = time;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">preOrder</span>(root-&gt;lchild, d + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">preOrder</span>(root-&gt;mchild, d + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">preOrder</span>(root-&gt;rchild, d + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">int</span> n1, n2, n3, n4;</span><br><span class="line">    node* root;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;n1, &amp;n2, &amp;n3, &amp;n4);</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">0</span>) &#123;</span><br><span class="line">            root = <span class="built_in">newnode</span>(n1);</span><br><span class="line">            m[n1] = root;</span><br><span class="line">        &#125;</span><br><span class="line">        node* rtemp = m[n1];</span><br><span class="line">        rtemp-&gt;lchild = <span class="built_in">newnode</span>(n2);</span><br><span class="line">        rtemp-&gt;mchild = <span class="built_in">newnode</span>(n3);</span><br><span class="line">        rtemp-&gt;rchild = <span class="built_in">newnode</span>(n4);</span><br><span class="line">        m[n2] = rtemp-&gt;lchild;</span><br><span class="line">        m[n3] = rtemp-&gt;mchild;</span><br><span class="line">        m[n4] = rtemp-&gt;rchild;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">preOrder</span>(root, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>, num, numtime);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>测试python代码</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_value</span>(<span class="params">x, y, f</span>):</span></span><br><span class="line">    x_decimal = x - np.floor(x)</span><br><span class="line">    y_decimal = y - np.floor(y)</span><br><span class="line">    x_base = <span class="built_in">int</span>(np.floor(x))</span><br><span class="line">    y_base = <span class="built_in">int</span>(np.floor(y))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x_decimal == <span class="number">0</span> <span class="keyword">and</span> y_decimal == <span class="number">0</span>: <span class="comment"># 若为整数点，直接返回对应数值</span></span><br><span class="line">        value = f[x_base][y_base]</span><br><span class="line">    <span class="keyword">elif</span> x_decimal == <span class="number">0</span>: <span class="comment"># 退化为y方向单线性插值</span></span><br><span class="line">        value = f[x_base][y_base] * (<span class="number">1</span> - y_decimal) + f[x_base][y_base + <span class="number">1</span>] * y_decimal</span><br><span class="line">    <span class="keyword">elif</span> y_decimal == <span class="number">0</span>: <span class="comment"># 退化为x方向单线性插值</span></span><br><span class="line">        value = f[x_base][y_base] * (<span class="number">1</span> - x_decimal) + f[x_base + <span class="number">1</span>][y_base] * x_decimal</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>: <span class="comment"># 执行双线性插值，value = L*C*R^T</span></span><br><span class="line">        L = [<span class="number">1</span> - x_decimal, x_decimal]</span><br><span class="line">        C = [[f[x_base][y_base], f[x_base][y_base + <span class="number">1</span>]],</span><br><span class="line">             [f[x_base + <span class="number">1</span>][y_base], f[x_base + <span class="number">1</span>][y_base + <span class="number">1</span>]]]</span><br><span class="line">        R = [<span class="number">1</span> - y_decimal, y_decimal]</span><br><span class="line">        value = np.dot(np.matmul(L, C), R)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(np.<span class="built_in">round</span>(value))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义原始图像的尺寸为src_x*src_y，现希望将其插值为tar_x*tar_y</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bilinear_interpolate</span>(<span class="params">img, tar_x, tar_y</span>):</span></span><br><span class="line">    x_proj = np.linspace(<span class="number">0</span>, img.shape[<span class="number">0</span>] - <span class="number">1</span>, tar_x)</span><br><span class="line">    y_proj = np.linspace(<span class="number">0</span>, img.shape[<span class="number">1</span>] - <span class="number">1</span>, tar_y)</span><br><span class="line">    temp_img = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> x_proj:</span><br><span class="line">        temp_row = []</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> y_proj:</span><br><span class="line">            temp_rgb = []</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">                value = cal_value(i, j, img[:, :, k])</span><br><span class="line">                temp_rgb.append(value)</span><br><span class="line">            temp_row.append(temp_rgb)</span><br><span class="line">        temp_img.append(temp_row)</span><br><span class="line">    <span class="keyword">return</span> temp_img</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    img = Image.<span class="built_in">open</span>(<span class="string">&#x27;Lenna.png&#x27;</span>)</span><br><span class="line">    img = np.array(img)</span><br><span class="line">    img_new = bilinear_interpolate(img, <span class="number">256</span>, <span class="number">256</span>)</span><br><span class="line">    img_new = np.uint8(np.array(img_new))</span><br><span class="line">    img = Image.fromarray(img_new)</span><br><span class="line">    img.show()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/VPS%E6%9C%8D%E5%8A%A1/" rel="tag"># VPS服务</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+          </div>
 
+        
 
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jfif">
-      <meta itemprop="name" content="Muyiyunzi">
-      <meta itemprop="description" content="In me the tiger sniffs the rose.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="慕弋云子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-01 19:00:00" itemprop="dateCreated datePublished" datetime="2021-04-01T19:00:00+08:00">2021-04-01</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-07-24 10:28:31" itemprop="dateModified" datetime="2021-07-24T10:28:31+08:00">2021-07-24</time>
-      </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2021/04/01/hello-world/#waline-comments" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" id="/2021/04/01/hello-world/" data-xid="/2021/04/01/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span id="/2021/04/01/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/02/codetest/" rel="prev" title="渲染测试">
+                  <i class="fa fa-chevron-left"></i> 渲染测试
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
@@ -710,6 +507,8 @@
 
 
 
+
+    <div class="comments" id="waline-comments"></div>
 </div>
   </main>
 
@@ -745,7 +544,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/2021/05/18/network/"}</script>
 <script>
 document.addEventListener('page:loaded', () => {
   NexT.utils.loadComments(CONFIG.waline.el).then(() => 

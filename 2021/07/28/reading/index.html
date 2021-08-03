@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cola.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cola-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cola-16x16.png">
+  <link rel="mask-icon" href="/images/cola-logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,700,700italic%7CMa+Shan+Zheng:300,300italic,400,400italic,700,700italic%7CNoto+Sans+SC:300,300italic,400,400italic,700,700italic%7CRoboto:300,300italic,400,400italic,700,700italic%7CJetBrains+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"muyiyunzi.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="序作为一个CV、泛AI方向的一年级生，目前也就读了几十篇论文，在这里简单谈一谈如何阅读一篇论文。这里主要关注CVPR、E(I)CCV、AAAI等视觉领域顶会文章，对于其他领域文章不保证泛用性。 以及如果有更好的论文阅读经验，欢迎一起讨论。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【干货】谈一谈CS.CV方向如何阅读论文？">
+<meta property="og:url" content="http://muyiyunzi.github.io/2021/07/28/reading/index.html">
+<meta property="og:site_name" content="慕弋云子">
+<meta property="og:description" content="序作为一个CV、泛AI方向的一年级生，目前也就读了几十篇论文，在这里简单谈一谈如何阅读一篇论文。这里主要关注CVPR、E(I)CCV、AAAI等视觉领域顶会文章，对于其他领域文章不保证泛用性。 以及如果有更好的论文阅读经验，欢迎一起讨论。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-28T11:35:16.000Z">
+<meta property="article:modified_time" content="2021-08-03T15:24:36.777Z">
+<meta property="article:author" content="Muyiyunzi">
+<meta property="article:tag" content="读论文">
+<meta property="article:tag" content="写论文">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://muyiyunzi.github.io/2021/07/28/reading/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://muyiyunzi.github.io/2021/07/28/reading/","path":"2021/07/28/reading/","title":"【干货】谈一谈CS.CV方向如何阅读论文？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【干货】谈一谈CS.CV方向如何阅读论文？ | 慕弋云子</title>
+  
+
+
+
+<link rel="dns-prefetch" href="https://blog-jade-kappa.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">慕弋云子</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">心有猛虎，细嗅蔷薇</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-如何食用本博客"><a href="/about/" rel="section"><i class="fas fa-cookie-bite fa-fw"></i>如何食用本博客</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-踩一踩"><a href="/guestbook/" rel="section"><i class="fas fa-shoe-prints fa-fw"></i>踩一踩</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E8%AE%AE%E6%95%B4%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">会议整理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%AF%87%E8%AE%BA%E6%96%87%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">一篇论文的主要结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">3.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-Work"><span class="nav-number">3.3.</span> <span class="nav-text">2. Related Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Approach-framework%E5%90%8D%E7%A7%B0%E4%BA%A6%E5%8F%AF"><span class="nav-number">3.4.</span> <span class="nav-text">3. Approach(framework名称亦可)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments"><span class="nav-number">3.5.</span> <span class="nav-text">4. Experiments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Conclusion"><span class="nav-number">3.6.</span> <span class="nav-text">5.Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E8%AF%A5%E6%80%8E%E6%A0%B7%E9%98%85%E8%AF%BB%E5%A4%9A%E7%AF%87%E8%AE%BA%E6%96%87"><span class="nav-number">4.</span> <span class="nav-text">应该怎样阅读多篇论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E9%98%85%E8%AF%BB-%E5%86%99related-work"><span class="nav-number">4.1.</span> <span class="nav-text">怎样阅读&#x2F;写related work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BBapproach%E5%B0%B1%E5%83%8F%E5%90%83%E9%A5%AD%E5%96%9D%E6%B0%B4%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">4.2.</span> <span class="nav-text">读approach就像吃饭喝水，怎么办</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%A6%8F%E5%88%A9"><span class="nav-number">6.</span> <span class="nav-text">小福利</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Muyiyunzi"
+      src="/images/avatar.jfif">
+  <p class="site-author-name" itemprop="name">Muyiyunzi</p>
+  <div class="site-description" itemprop="description">In me the tiger sniffs the rose.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Muyiyunzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Muyiyunzi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/fan-jia-nan-36/answers/by_votes" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fan-jia-nan-36&#x2F;answers&#x2F;by_votes" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://muyiyunzi.github.io/2021/07/28/reading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jfif">
+      <meta itemprop="name" content="Muyiyunzi">
+      <meta itemprop="description" content="In me the tiger sniffs the rose.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="慕弋云子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【干货】谈一谈CS.CV方向如何阅读论文？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-28 19:35:16" itemprop="dateCreated datePublished" datetime="2021-07-28T19:35:16+08:00">2021-07-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-03 23:24:36" itemprop="dateModified" datetime="2021-08-03T23:24:36+08:00">2021-08-03</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B9%B2%E8%B4%A7/" itemprop="url" rel="index"><span itemprop="name">干货</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2021/07/28/reading/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/2021/07/28/reading/" data-xid="/2021/07/28/reading/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span id="/2021/07/28/reading/" class="post-meta-item leancloud_visitors" data-flag-title="【干货】谈一谈CS.CV方向如何阅读论文？" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>作为一个CV、泛AI方向的一年级生，目前也就读了几十篇论文，在这里简单谈一谈如何阅读一篇论文。这里主要关注CVPR、E(I)CCV、AAAI等视觉领域顶会文章，对于其他领域文章不保证泛用性。</p>
+<p>以及如果有更好的论文阅读经验，欢迎一起讨论。</p>
+<span id="more"></span>
+
+<h2 id="会议整理"><a href="#会议整理" class="headerlink" title="会议整理"></a>会议整理</h2><p>先整理一份主要会议的时间表，方便大家对自己的论文档期有所安排。这里主要考虑<strong>投稿截止时间</strong>，会议时间一般在投稿截止时间以后半年左右，可以自行查看，毕竟DDL对于我们才是更重要的嘛~</p>
+<p>在这里以2020-2021的会议时间节点作为参考，每年基本都在参考时间附近，可以自行查阅具体时间，这里有一个<a target="_blank" rel="noopener" href="http://www.conferencelist.info/upcoming.html">conference list</a>的网站似乎整理的还是较全的。</p>
+<table>
+<thead>
+<tr>
+<th align="center">会议缩写</th>
+<th align="center">参考日期</th>
+<th align="center">距离上一个会议</th>
+<th align="center">距离下一会议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IJCAI</td>
+<td align="center">1.2</td>
+<td align="center">47</td>
+<td align="center">33</td>
+</tr>
+<tr>
+<td align="center">ICML</td>
+<td align="center">2.4</td>
+<td align="center">33</td>
+<td align="center">41</td>
+</tr>
+<tr>
+<td align="center">ICCV/ECCV</td>
+<td align="center">3.17</td>
+<td align="center">41</td>
+<td align="center">31</td>
+</tr>
+<tr>
+<td align="center">ACM MM</td>
+<td align="center">4.17</td>
+<td align="center">31</td>
+<td align="center">39</td>
+</tr>
+<tr>
+<td align="center">NIPS</td>
+<td align="center">5.26</td>
+<td align="center">39</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td align="center">BMVC</td>
+<td align="center">6.18</td>
+<td align="center">23</td>
+<td align="center">75</td>
+</tr>
+<tr>
+<td align="center">AAAI</td>
+<td align="center">9.1</td>
+<td align="center">75</td>
+<td align="center">76</td>
+</tr>
+<tr>
+<td align="center">CVPR</td>
+<td align="center">11.16</td>
+<td align="center">76</td>
+<td align="center">47</td>
+</tr>
+</tbody></table>
+<p>注1：只有奇数年才有ICCV，偶数年才有ECCV，虽然ECCV是CCF B不过明显偏低了。两者真实水平比较接近，都很高，且会议时间节点大致接近。<br>注2：上面conference list的网站中似乎没有收录BMVC。BMVC虽是CCF C类会议，但是水平可以说是B+，而且投稿的时间节点比较好，并且据说非英国文章的收录率更高些，也可以去英国玩一趟~<br>注3：AAAI是CCF A，但是相对来讲水一些，投稿难度稍低一些，所以研一的学生如果可以，从入学开始就冲着第二年的AAAI赶一波还是挺不错的节奏。</p>
+<p>期刊则主要是TPAMI，有时也会有IJCV、TIP等，投稿时间不限，一般都是会议论文<strong>发表之后</strong>改一改再转投期刊，很少有直接去莽期刊的。国内教职看期刊似乎更多一些，相比会议来讲，有些小会可能更有价值，这个具体的我不是很清楚，不多说。</p>
+<hr>
+<p><strong>读论文其实是一个模式识别的过程</strong>。读多了，就会把论文拆解成套路，也就能逐渐归纳总结出一篇好论文、投中了的论文应该是怎样的结构，这样就会提高我们的论文被接受率。</p>
+<p>所以在接下来的讲解中，我也会同时以写论文的角度来审视论文本身，读和写在思路上应该是有共通之处的。</p>
+<h2 id="一篇论文的主要结构"><a href="#一篇论文的主要结构" class="headerlink" title="一篇论文的主要结构"></a>一篇论文的主要结构</h2><p>这些顶会的论文基本结构都是大致相似的（我最近也准备总结一篇论文常用语料出来，并准备不断更新），大致总结如下：</p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>顾名思义，摘要。这个部分我认为是按这个小结构去写的：</p>
+<ol>
+<li>所要解决的问题大类（比如Monocular 3D Object Detection）多么重要，有哪些应用场景（比如为自动驾驶提供了解决方案）；</li>
+<li>main challenge是什么地方（可能有很多，但会挑这篇论文的主要贡献点讲）</li>
+<li>主流做法大致是如何的，但是存在一些limit</li>
+<li>本文所提出的方法是怎样做的（重点展开部分，一句话讲不清就会加连词细讲）</li>
+<li>方法的novelty和结果，比如数据集上排行第一，或泛化性能怎样怎样好</li>
+</ol>
+<p>注意，在Abstract中是不能有任何引用的，也不会提及任何related work。</p>
+<p>同时，还有缩写的问题。一般来讲，<strong>Abstract与正文的缩写是不相通的</strong>。在英文中使用缩写都是在第一次出现时加括号，然后后面就可以直接使用缩写了，比如第一次提到Convolution Neural Network时在后面加(CNN)，后面就可以直接使用CNN替代了。但如果你在Abstract中使用了缩写，在正文中需要重新声明。</p>
+<p>我的理解是Abstract可能是会单拿出来看的，和正文属于分离的，所以需要重新声明。因此我们在写的时候，除非你是在Abstract中使用两次及以上这个术语，否则就不必定义缩写了。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h3><p>这一部分可以看做是对<strong>Abstract前半部分</strong>的进一步展开，毕竟Intro的作用就是顾名思义，做引入的。所以这就有点像是刘备打着皇叔的名号、君士坦丁承认基督教一样，我们需要为自己的论文找到一些背书，尽管这个背书可能是站不住脚的。</p>
+<p>所以这就能扯得很远，比如SfMLearner那一篇，讲无监督的单目深度和ego-motion的，就可以从人类的视觉入手，声称人类可以对深度进行很好的单目感知，以及自我运动的感知，那么我的算法是不是就也具有成立的可能？再比如一些讲自监督、无监督方法的文章，就可以引用婴儿也没有ground truth，但他们同样也可以逐渐完成xx任务，那么其论文的工作是不是就有支撑点了呢？</p>
+<p>又或者扯一些生物学里什么神经理论、心理学之类的一些理论，反正论文的reviewer也不是搞这些的，只要听着觉得还挺合理，就会对这篇论文开始产生一定的好感。</p>
+<p>这一部分根据具体领域不同可能会写的有些差异，但也可以大致总结出来一个小结构：</p>
+<ol>
+<li>从大背景上讲述所研究问题的意义，主流的解决方式都有哪些。这里会引用一些相关的工作，并对工作进行流派上的整理和归类，但大致说一下思想就好，后面的related work部分还会细讲。</li>
+<li>本论文所属于的流派中，所遇到的问题是什么？（往往也对应着论文的motivation）根据前文的工作，有哪些关键性的结论？（比如提取特征很重要，然后附上几个引文，这一部分往往也是论文的基石和启发）</li>
+<li>基于以上问题，或是某个具体的出发点，本问题提出……（常用话术：We propose a novel (<em>task name</em>) framework, xxx, which…）然后具体展开介绍一下每一个子结构。</li>
+<li>本文的主要贡献点在于什么，一般可以三条左右为宜。有的论文也会把在数据集榜单上刷到SOTA（State Of The Art，当前最佳）也算作一个贡献点，大概是凑个数。（常用话术：Our main contributions are three-fold. (1) …(2) …）</li>
+</ol>
+<p>到了这里算是一个分水岭，大部分人就会读一个Abstract+Introduction，然后就会声称读完了这篇论文。诚然，大家读到这里一般就可以判断出来，这篇论文对于自己的研究到底有没有价值，然后就会决定是否要继续往下读。</p>
+<h3 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h3><p>这部分的内容通常是以加粗小标题来写的。比如自己的研究涉及了A、B、C三个方面，那么就会以A、B、C作为加粗标题置于每段段首，然后逐段讲解A、B、C这三个领域的工作进展。</p>
+<p>这里的一段，并不一定就只有一个paragraph，同样地，如果这一个方面又可以进一步分为多个子方面，也可以再向下进行分层，这里的格式不太同意，有用数字加右括号的，有用斜体的，但总之大致结构都是相同的。</p>
+<p>这一部分的内容乍一看凌乱稀碎，实际上很有研究价值，具体的读法我们在后面进一步讨论。</p>
+<h3 id="3-Approach-framework名称亦可"><a href="#3-Approach-framework名称亦可" class="headerlink" title="3. Approach(framework名称亦可)"></a>3. Approach(framework名称亦可)</h3><p>这一部分就是具体展开介绍自己所提出的论文方法了，对于一些关键的模块也要抽离出来仔细讲解。</p>
+<p>一般来讲会先给一个整体的网络结构（这一部分一般都是在论文的第三页，网络结构图一般也会被放置在第三页最上方），然后按照数据流的顺序<strong>逐部分拆解</strong>讲解，这些内容有时会被称作“subnetwork”；然后会从实验角度出发讨论<strong>损失函数的选择与设计</strong>，包括对超参数的讨论等，比如某某参数大了的话会倾向于学习效果A，小了的话倾向于学习效果B。</p>
+<h3 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h3><p>前面已经讲完了炼丹的大致思路，那么此部分主要讲解的就是<strong>炼丹的具体步骤和效果</strong>了。这一部分大概也会分为三节，可以基本分为：</p>
+<ol>
+<li><p>Implementation details<br>首先是数据集的使用，训练集与测试集的划分：如果前边SOTA工作都用的某种划分方式，那么为了公平起见一般也会沿用前人的划分方式，这样论文会更有公信力。然后是training procedure的设定，比如用的什么显卡，什么框架，现在pytorch都也要引用了；再然后优化器和具体的参数，比如你用Adam的话，初始学习率，learning rate policy之类的一般也都要声明；最后就是batch size，还有一些其他超参数的选择（这里指具体的数值了）。如有其他的细节可以再做补充，比如数据增强、目标检测中的NMS设定等。</p>
+</li>
+<li><p>Results<br>这里的results又分quantitative的和qualitative的。<br>quantitative的好说，自然就是打点，能干过SOTA的你就可以说自己是SOTA，很简单粗暴。一般来讲就是结合表单进行分析，拉开了第二名多大差距，可以是绝对的数值，也可以是相对的比例。<br>qualitative的则是指定性分析，往往会结合一些图片，大家要形成一种认识就是，<strong>新的SOTA并不一定是全面吊打老SOTA的</strong>，而很可能在某一部分吊打，另一部分拉胯，但最后总的数值更高些。所以在qualitative result中会挑那些吊打的几张图放到论文中，虽然颇有断章取义的感觉，但reviewer和读者确实没有话说。</p>
+</li>
+<li><p>Ablation Study<br>新手在读论文时可能会对这个概念非常陌生，它的中文名叫<em>消融实验</em>。注意，消融实验并不等于控制变量法，而是“减去变量法”。<br>这个概念其实并不陌生，举个例子大家就明白了。高中生物里面想要探究一个基因控制什么样的形状，一般怎么做？嗯，敲除这段基因。如果敲除这段基因后，生物体表现出蛋白质A分泌不足，OK那么我就知道这个基因控制蛋白质A的分泌了，这就是非常典型的消融实验。<br>所以消融实验一般是会先找一个baseline，有时也会称其为vanilla（这算是个梗吗，就是外国人觉得「香草」这个味道跟原味没太大差别，所以就代指「朴素」了），然后逐渐对其添加模块，以彰显出某一模块的作用。比如一个方法是由vanilla+A+B+C组成的，那么ablation study可以是用vanilla，vanilla+A，vanilla+A+B，vanilla+A+B+C组成的，以表现出A、B、C三个模块分别对于任务贡献了多少。也可以是vanilla+B+C，只要输入输出是允许的。</p>
+</li>
+</ol>
+<p><strong>有时，控制变量法也会被算作Ablation Study</strong>，不知道是可以这样用还是说大家已经对这个概念泛化了。不光用于网络结构，损失函数往往也较常用于ablation study，以展现对某一内容施加惩罚的思想确实有效。</p>
+<ol start="4">
+<li>Discussion<br>这个部分是比较弹性的，不一定有。<strong>如何证明数据指标上更高不是过拟合、不是刷点刷出来的？这一部分就主要关注这些</strong>。常见的操作有，对中间层的feature map做抽离，做一些可视化，比如损失函数中说这部分是为了让训练出的A有着xx的效果，那么就需要对A进行一下可视化，看看到底有没有这样的效果。也可以做一些泛化性能上的比较测试等，总之这一部分算是锦上添花的一部分，所以说比较弹性——毕竟「锦」就已经足够让论文投中了。</li>
+</ol>
+<h3 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5.Conclusion"></a>5.Conclusion</h3><p>这部分内容基本就是对Abstract的rewrite了，做一个收束全文的作用。主要内容就是提出了什么什么方法，有什么contribution，最终在哪个哪个榜单排行SOTA。个人感觉是最鸡肋的一部分。</p>
+<h2 id="应该怎样阅读多篇论文"><a href="#应该怎样阅读多篇论文" class="headerlink" title="应该怎样阅读多篇论文"></a>应该怎样阅读多篇论文</h2><p>在了解了论文的主要结构后，这一部分更加侧重于讲解一些<strong>读论文时的宏观方式</strong>与<strong>论文管理</strong>方面的工作。</p>
+<p>宏观来讲，读论文可以分为两种方式：BFS和DFS。我比较偏后者，这个东西全看个人习惯，现在我可能更偏向两者结合。</p>
+<p>BFS就是说遇到不会的概念就先跳过，先速览全文；然后第二次稍微放慢速度些，主要着手弄懂一些基本假设；第三次可以弄懂更多的细节，这样逐渐往复，直至把全部细节弄懂，或者这篇论文不必要再读了。</p>
+<p>DFS就是递归式地深层进入一篇论文，遇到任何不会的概念就立马去查，去读相关的CSDN、知乎甚至原论文，弄懂之后再回到原论文继续读，直至读完论文。</p>
+<p>这里我比较建议：先BFS速读一遍论文，Abstract和Intro要细，Related work可以快速过甚至不看，Approach稍快，关注一些特殊模块，experiment图一乐。<strong>总体来讲第一遍要关注图和表，这样可以对文章形成初步的认识，并且判断是否值得你全文细读</strong>，有时可能只需要关键部分细读，就不必看全文。</p>
+<h3 id="怎样阅读-写related-work"><a href="#怎样阅读-写related-work" class="headerlink" title="怎样阅读/写related work"></a>怎样阅读/写related work</h3><p>如果全文是值得细读的，那再具体进入文章，这里着重说一下related work这一部分。</p>
+<p>很多人觉得这部分比较鸡肋，反正也不是“鸡肉”（框架主体部分），但又是论文形势要求，所以比较鸡肋，实则不然。我认为，<strong>一份好的related work，就能够让读者知道这篇文章的大致思路是从何而来，能否站得住脚</strong>。</p>
+<p>一个领域那么大，就算是小同行，也要几十篇相关论文，这还没算ResNet，pytorch这种万金油文章，一篇论文是不可能有七八十篇引用文献的（有很多五六十篇的我都觉得有点离谱）。所以在related work这部分，需要对前序工作进行梳理，尝试找到多条脉络。</p>
+<p>前序工作更像是一棵大树，大概传统方法可以算作根基，深度学习时代的第一篇可以被算作分叉口，然后逐渐分叉处许多篇精彩的工作。而一篇论文的related work，则更像是对着读者指，中间的哪哪片叶子、哪哪个结点对我的工作有着启发性的作用，而不是全部指出所有叶子，或是全部指出你看过的所有叶子。</p>
+<p>读论文亦是如此，那些叶子结点可以看做是SOTA文章，父节点可以看做是历年的SOTA，或是其他的经典文献，很多人就盯着今年的CVPR读，那肯定是不行的。而我们知道，搞科研、进入一个新领域的第一步就是读综述，综述是可以帮你把这一切的脉络梳理得很好的，正是因为它cover了足够多的文章，建立的树才<strong>相对</strong>比较全面。</p>
+<p>造成这种科研生态的原因，大概也是源于当今的科研模式，就好像酒馆战棋上分一样，我们做不了神仙，也不想“速八”（末位出局），那么什么样的文章才最稳呢？A+B又有充足实验量的文章。所以很多情况下，一个组follow另一个组的工作，然后又来一个什么组follow，就太正常不过了，甚至去github源码上都能看到“we borrow the code from xxx and xxx”等类似的字样，我并不是说这样不好，只是说线性发展是当下的一个常态。</p>
+<h3 id="读approach就像吃饭喝水，怎么办"><a href="#读approach就像吃饭喝水，怎么办" class="headerlink" title="读approach就像吃饭喝水，怎么办"></a>读approach就像吃饭喝水，怎么办</h3><p>我觉得大家都曾有过这种感觉，就是这框架用的东西我也都懂了，也都知道了，他说自己哪里哪里厉害，我看着确实也觉得厉害，就这样读完了论文，过了两天啥也不记得了，所谓「吃饭喝水」。</p>
+<p>这时就体现出了论文总结的重要性。不必要每篇读完都写个博客（如果你有这个闲工夫，那自然也是不错的），但可以至少提炼总结出一些关键点，这对我们后面写论文时的related work部分也是有用的，能够快速捡起来论文主要是在讲什么的。</p>
+<p>曾看到过一篇知乎文章叫<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/155723902">吴恩达教你怎么读论文</a>，我是受益良多的，虽然当时已有了类似的想法，但有大佬的背书让我觉得这个思路是没问题的。我稍加了一些改进，总结如下，如有兴趣也可以拜读下原文。</p>
+<br>
+
+<p>有人习惯于用Mendeley之类的文献管理工具管理论文，我下过，可能是因为没有太探索和学习的原因，我感觉不如excel用着顺手。我习惯于开一个excel，对我读过的所有论文进行整理，分栏大致如下，每读一篇都会填写：</p>
+<ol>
+<li>阅读时间（可选）</li>
+<li>论文题目</li>
+<li>第一作者（注意equal distribution）</li>
+<li>Institute</li>
+<li>论文年份及会议</li>
+<li>主题分类</li>
+<li>关键技术</li>
+<li>尝试总结</li>
+<li>motivation</li>
+<li>理解程度</li>
+</ol>
+<p>Institute指论文/期刊的作者隶属于什么机构，这样一来可以看下是哪些机构在涉猎这个领域，主要是工业界还是学术界，二来也对领域发展的脉络有一定的了解。</p>
+<p>主题分类指任务的大分类，可以分得很粗糙，比如单目视觉，也可以分得很细，比如单目深度，单目3D目标检测。这对于论文读的比较杂的同学比较有帮助，具体分类程度自我随意就好。</p>
+<p>关键技术指一些比较通用的backbone或者模块化的东西，比如ResNet，ASPP，mobilenet的depthwise convolution，损失函数比如infoNCE等，除了一些神仙大作什么trick也不用就把点刷的很高，大部分工作还是会有很多trick的，或者是从trick中找到启发。</p>
+<p>尝试总结部分是自己对论文进行闭眼复述。闭眼之后再反复浏览论文和完善你复述的内容。日后，我们可以通过自己写的总结部分快速捡起来一篇论文。</p>
+<p>motivation部分，对于初学者可能比较陌生，但是<strong>一个非常关键的概念</strong>，仅仅理解到动机这个层面是远远不够的。我刚入学那会导师跟我们谈话，强调了motivation的重要性，然而他来了句“他们之前都说motivation，我以后不懂，后来说多了也就明白了”，直接给我带歪……<strong>我理解的motivation是指：从结果出发，看看别人的问题是什么？</strong></p>
+<p>一篇好的工作，不是魔改哪个模块，调调参刷到SOTA就行了，而应该是<strong>问题导向</strong>的，我想这一点在工业界应该是尤为强调的。比如当今SOTA在遮挡物体上解决的很不好（这可能是个很大的问题），那么我们能否找到一个方法去解决呢？最好的当然是能挖出来approach的某一部分出了问题，然后进行改善，大多数情况需要重新设计一个框架。像遮挡，深度问题中的镜面等等这都是老生常谈的问题了，很多时候大家比的是能否改善的更好，或是找到一些更细节的问题，但总之都一定是结果导向的，这样的文章是绝对的好文章。下面举几个例子：</p>
+<p><strong>典型的错误理解是</strong>：为了让自动驾驶的成本降低，不依赖于高昂的雷达设备，我们的<em>动机</em>是开展单目视觉工作的研究。这个只能叫Intro，只能叫研究意义。</p>
+<p><strong>可能不算错误的理解</strong>：我们的<em>动机</em>是为了让filter学习到怎样怎样的特征，因而设计了这样的结构。感觉这样的文章就比较A+B+实验量，不能说这样的文章错，或者没有意义，可能也是好文章，是大多数人的常规水平文章，也只能把motivation总结到这种程度了。毕竟不是所有文章都要解决问题，那每年也不会有几千篇顶会文章了。</p>
+<p><strong>优秀的理解</strong>：对于一些远距离的小尺寸目标，SOTA捕捉的不太好，所以我们的<em>动机</em>是让结构具有不同尺度的检测能力，设计了这样的结构。这样的文章就比较合理通畅，在与前序SOTA的对比环节中也有许多可以吊打的图放出来，你的motivation就应该是吊打的地方。</p>
+<p>理解程度可以设置成选项，0~0.2，0.2~0.4，然后一直到0.8~1，对于一些粗看的文章就是.2到.4，细看且基本理解的就是.6到.8，连代码也跑了读了的，我就会设置在.8到1。</p>
+<p>最近我认为可能还可以再加一个部分，就是<strong>什么内容支撑了这个文章的意义</strong>，这一部分不一定要写在总结里，但看的时候一定要思考一下，到底这一篇是不是在过拟合，它所提出的结构哪里证明达到了预期的效果。这就很需要一些可视化的工作。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这次的内容说的可能有些冗长甚至杂乱，但我想对于一个初学者来说，这应该是足够接受的内容。总之，要开一个excel来整理自己的文献，并且在阅读论文时着重关注一些方面，以及如果你写论文时也能把这些方面讲得很清楚，那大概是一篇优秀的论文没跑了。</p>
+<h2 id="小福利"><a href="#小福利" class="headerlink" title="小福利"></a>小福利</h2><p>给你们看下我现在的桌面图标。</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/08/03/fLktSYVqdQscTEU.png"/></div>
+
+
+<p>主要用途是：</p>
+<ul>
+<li>sublime当一个高级记事本，连接服务器传输文件的常用命令，以及随手记一些科研上的小想法都在这上面；</li>
+<li>vscode用于写latex和markdown，是一个很好的编辑器；</li>
+<li>pycharm不用说了，集IDE与Xshell于一身的代码利器，同样的代码运行速度大概是vscode的八九倍；</li>
+<li>文件管理器，这是ubuntu那边带来的习惯，这个加快速访问，效率还是不错的；</li>
+<li>qq音乐从小就用，不说了；</li>
+<li>chrome，插件生态非常棒；</li>
+<li>微信略；</li>
+<li>excel用于快速访问文献管理；</li>
+<li>acrobat用于快速访问最近阅读的论文，并且我搞了个破解版便于pdf转word；</li>
+<li>word文档是用于随手记录一些图文的东西，比如论文复现时的一些小document，最近也在逐渐被ppt替代；</li>
+<li>firefox用于同开一份论文查阅索引文献具体是哪一篇，点了链接再回去思路就有些断了，反正两个屏幕。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Muyiyunzi 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Muyiyunzi 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Muyiyunzi
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://muyiyunzi.github.io/2021/07/28/reading/" title="【干货】谈一谈CS.CV方向如何阅读论文？">http://muyiyunzi.github.io/2021/07/28/reading/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%BB%E8%AE%BA%E6%96%87/" rel="tag"># 读论文</a>
+              <a href="/tags/%E5%86%99%E8%AE%BA%E6%96%87/" rel="tag"># 写论文</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/24/server/" rel="prev" title="【记录】服务器使用">
+                  <i class="fa fa-chevron-left"></i> 【记录】服务器使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Muyiyunzi</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">24k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">22 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/2021/07/28/reading/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() => 
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => {
+    new Waline(CONFIG.waline);
+  });
+});
+</script>
+</body>
+</html>

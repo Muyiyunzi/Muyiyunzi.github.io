@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cola.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cola-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cola-16x16.png">
+  <link rel="mask-icon" href="/images/cola-logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,700,700italic%7CMa+Shan+Zheng:300,300italic,400,400italic,700,700italic%7CNoto+Sans+SC:300,300italic,400,400italic,700,700italic%7CRoboto:300,300italic,400,400italic,700,700italic%7CJetBrains+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"muyiyunzi.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="背景大致在两三周前吧，我老家的表姐让我给她装一个台式机用，但是她对电脑可以说一窍不通，目前家里坏了的电脑也是几年前「电脑城」的产物。 硬件圈的人大概都清楚，「电脑城」意味着什么，不过好在硬盘还没坏可以捞出来接着用，剩下的东西都需要配一下了。 根据我姐的需求：  可以亮机 经常修图 低预算  我想了想，以当今（2021年10月中旬）这个显卡溢价且不见降的世道，需求①肯定是要用CPU集显了；对于②，那">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【杂文】聊一个自装1200元的主机配置经历">
+<meta property="og:url" content="http://muyiyunzi.github.io/2021/11/01/zhuangji/index.html">
+<meta property="og:site_name" content="慕弋云子">
+<meta property="og:description" content="背景大致在两三周前吧，我老家的表姐让我给她装一个台式机用，但是她对电脑可以说一窍不通，目前家里坏了的电脑也是几年前「电脑城」的产物。 硬件圈的人大概都清楚，「电脑城」意味着什么，不过好在硬盘还没坏可以捞出来接着用，剩下的东西都需要配一下了。 根据我姐的需求：  可以亮机 经常修图 低预算  我想了想，以当今（2021年10月中旬）这个显卡溢价且不见降的世道，需求①肯定是要用CPU集显了；对于②，那">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-01T02:15:43.000Z">
+<meta property="article:modified_time" content="2021-11-02T08:19:56.849Z">
+<meta property="article:author" content="Muyiyunzi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://muyiyunzi.github.io/2021/11/01/zhuangji/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://muyiyunzi.github.io/2021/11/01/zhuangji/","path":"2021/11/01/zhuangji/","title":"【杂文】聊一个自装1200元的主机配置经历"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【杂文】聊一个自装1200元的主机配置经历 | 慕弋云子</title>
+  
+
+
+
+<link rel="dns-prefetch" href="https://blog-jade-kappa.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">慕弋云子</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">心有猛虎，细嗅蔷薇</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-如何食用本博客"><a href="/about/" rel="section"><i class="fas fa-cookie-bite fa-fw"></i>如何食用本博客</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-踩一踩"><a href="/guestbook/" rel="section"><i class="fas fa-shoe-prints fa-fw"></i>踩一踩</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8D%95"><span class="nav-number">2.</span> <span class="nav-text">配置单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%80%83%E8%99%91"><span class="nav-number">3.</span> <span class="nav-text">配置考虑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">3.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9D%BF"><span class="nav-number">3.2.</span> <span class="nav-text">主板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD%E3%80%81HDD"><span class="nav-number">3.4.</span> <span class="nav-text">SSD、HDD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E7%AE%B1%E7%94%B5%E6%BA%90"><span class="nav-number">3.5.</span> <span class="nav-text">机箱电源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">装机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%86%E5%8C%85"><span class="nav-number">4.1.</span> <span class="nav-text">拆包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E4%B8%8A%E4%B8%BB%E6%9D%BF"><span class="nav-number">4.2.</span> <span class="nav-text">CPU上主板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90%E7%BA%BF"><span class="nav-number">4.3.</span> <span class="nav-text">电源线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98-1"><span class="nav-number">4.4.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%88%90"><span class="nav-number">4.5.</span> <span class="nav-text">完成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Muyiyunzi"
+      src="/images/avatar.jfif">
+  <p class="site-author-name" itemprop="name">Muyiyunzi</p>
+  <div class="site-description" itemprop="description">In me the tiger sniffs the rose.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Muyiyunzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Muyiyunzi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/fan-jia-nan-36/answers/by_votes" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fan-jia-nan-36&#x2F;answers&#x2F;by_votes" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://muyiyunzi.github.io/2021/11/01/zhuangji/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jfif">
+      <meta itemprop="name" content="Muyiyunzi">
+      <meta itemprop="description" content="In me the tiger sniffs the rose.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="慕弋云子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【杂文】聊一个自装1200元的主机配置经历
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-01 10:15:43" itemprop="dateCreated datePublished" datetime="2021-11-01T10:15:43+08:00">2021-11-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-02 16:19:56" itemprop="dateModified" datetime="2021-11-02T16:19:56+08:00">2021-11-02</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2021/11/01/zhuangji/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/2021/11/01/zhuangji/" data-xid="/2021/11/01/zhuangji/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span id="/2021/11/01/zhuangji/" class="post-meta-item leancloud_visitors" data-flag-title="【杂文】聊一个自装1200元的主机配置经历" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>大致在两三周前吧，我老家的表姐让我给她装一个台式机用，但是她对电脑可以说一窍不通，目前家里坏了的电脑也是几年前「电脑城」的产物。</p>
+<p>硬件圈的人大概都清楚，「电脑城」意味着什么，不过好在硬盘还没坏可以捞出来接着用，剩下的东西都需要配一下了。</p>
+<p>根据我姐的需求：</p>
+<ul>
+<li>可以亮机</li>
+<li>经常修图</li>
+<li>低预算</li>
+</ul>
+<p>我想了想，以当今（2021年10月中旬）这个显卡溢价且不见降的世道，需求①肯定是要用CPU集显了；对于②，那是显示器的问题，PS一类修图软件是不需要CUDA加速的；至于需求③……</p>
+<p>嗯，于是我决定挑战一下自己，以最低价格装一台电脑需要多少钱？</p>
+<span id="more"></span>
+
+<h2 id="配置单"><a href="#配置单" class="headerlink" title="配置单"></a>配置单</h2><p>不废话，先上配置单：</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/01/HPMJBapciTNmbZk.png"/></div>
+
+<p>总价：609+193+168+219=1189元</p>
+<p>简单评述一下就是：</p>
+<ul>
+<li>整体来讲我还是比较求稳的，如果在装机方面稍有研究，这些牌子应该都是多少听说过的大牌子，低价位其实更要求稳，不要搞杂牌子以致不兼容之类的翻车。</li>
+<li>CPU高性价比还要便宜，那自然是A家没跑，低价位选择盒装，使用原配散热就非常稳；主板方面选择入门A系列3代的A320，几大品牌大致都差不多，华擎似乎众评不错；</li>
+<li>内存方面，低端A家CPU的兼容性是个问题，求稳选择了大品牌威刚，万紫千红系列也是经过了国内市场的检验；</li>
+<li>为了系统的响应速度，固态还是必有的，这里选择便宜好用的Asgard，至于西数铠侠之流，其实快多少也感受不出来；</li>
+<li>最后机箱电源选择了Tt的套装，不图便宜。一个好的电源让你机器长久稳定，一个好的机箱理线舒适美观大方。</li>
+<li>由于需求方有老硬盘可以接着使，这里没有加配机械硬盘。如有需求可以选择更大容量的SSD或者自购机械硬盘。</li>
+</ul>
+<p>实装成品图（这里加上了老的机械）：</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/01/WsQaDyzbmIudfiU.jpg"/></div>
+
+<p>如果你想再细致地听一下我在配置选择时的一些考虑，以及我在装机过程中遇到的各种坑和填坑的经历，那么你可以继续往下读；如果不想的话，就可以直接拿着这套配置单去抄作业了，具体购买渠道我会放在文末，或者大家自己动手搜一搜应该也很快找得到~</p>
+<h2 id="配置考虑"><a href="#配置考虑" class="headerlink" title="配置考虑"></a>配置考虑</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>首先科普个判断CPU有无集成显卡的小知识：A家的Ryzen系列CPU中，最后带一个<strong>G</strong>是<strong>有</strong>集成显卡的，反之则不然，比如大家可能耳熟能详的3600X、3700X等都是不带集显的；而intel家的命名规则，是末尾有<strong>F</strong>则<strong>无</strong>集显。</p>
+<p>而低端价位中，更应该考虑一些第三方商家的板U套装，往往是非常稳定且实惠的。而且CPU要尽量选择盒装，盒装会附赠AMD原装散热器，很好使~</p>
+<p>而入门级3000系列中也就是3000G、3200G、3400G这几个系列可供选择，再加上一个200GE，而市场上3200G和3400G基本板U都能在1500左右，这大大地增加了预算，基本排除；3000G是在200GE上做的升级，可以超频，核显有小幅提升，我认为都比较鸡肋，于是最终<strong>追求极致的便宜选择了200GE</strong>。</p>
+<p>事实上两者基本差价现在也就在100左右，选择谁都可以吧。</p>
+<h3 id="主板"><a href="#主板" class="headerlink" title="主板"></a>主板</h3><p>AMD所搭配的主板可以分为三个系列：X高端，B面向大众中端、A面向入门较低端。字母之后的第一个数字则表示代数，比如大家常见的B450M，就是中端系列4代板子，最后的M表示是MATX大小规格的板子。</p>
+<p>所以我们这波选择了200GE这样老而强大的CPU，主板也就得相应地“49年入国军了”，<strong>我们看中A320M的便宜好用，但同时也放弃了扩展和升级的可能</strong>。如果您的装机需求有后期升级的打算，也大可以选购一块最新的B550主板配200GE，理论上应该也是可以亮机的（未测试，3000G可能兼容新主板会更好些），后期升级CPU替换掉也是可以的。</p>
+<p>主板四个常见的大牌子就是技嘉、微星、华擎和华硕了吧，这边选择最便宜的华擎（ASRock），在用料上也没有什么缩水，大家放心购买就行了。</p>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><p>在内存的选择中，虽然单8G比双4G要便宜，但是<strong>双通道的加持对于集成显卡的性能提升是非常大的</strong>。我虽然没有求证过，但了解了大致原因是说，使用集显时，cpu会使用1G左右的内存会作为显存占用，这时如果有双通道的话在任务调度上会更加轻松，我觉得这个是比较合理的所以信了。</p>
+<p>内存的几个大牌子一般是金士顿、科赋、威刚，第二梯队就比较多了，比如十铨、宇瞻之类的；海盗船和芝奇也是大牌子，质量保证的情况下更多是在玩RGB的，这里就不讨论了。</p>
+<p>我当时是在国产杂牌光威（Gloway）和威刚之间的纠结的，众所周知，内存这种东西盗版货太多了，所以其实不太敢在淘宝买，但在2021年其实也很难在官方店铺买到4G*2的套条了，甚至都不一定有4G的单条——有也是血贵，一般都是价格衬托8G条多么便宜实惠，勾引大家去买8G条。</p>
+<p>然后我就看到个光威的自营有买4G条且很便宜，但最终还是迫于兼容性选择了威刚的万紫千红，更重要的是，<strong>威刚是终生质保</strong>！所以可以放心大胆地在淘宝买威刚的条（当然要有运费险orz）。</p>
+<p>不过内存后面还是翻车了，在装机部分会细聊。</p>
+<h3 id="SSD、HDD"><a href="#SSD、HDD" class="headerlink" title="SSD、HDD"></a>SSD、HDD</h3><p><strong>有一块固态硬盘做系统盘是一件非常舒服的事情</strong>，尤其是在硬盘比较老旧的情况下。阿斯加德我感觉是一个近几年异军突起的牌子，口碑还不错，感觉应该算是第二梯队的顶流，以低廉实惠的价格作出一流水准的性能。</p>
+<p>这里就以Asgard的AN2为例，其参考价格列在下面：</p>
+<table>
+<thead>
+<tr>
+<th align="center">容量</th>
+<th align="center">参考价</th>
+<th align="center">相对上级涨幅</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">250G</td>
+<td align="center">169</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">500G</td>
+<td align="center">299</td>
+<td align="center">76.9%</td>
+</tr>
+<tr>
+<td align="center">1T</td>
+<td align="center">499</td>
+<td align="center">66.9%</td>
+</tr>
+</tbody></table>
+<p>这表的意思就是，你要多花百分之多少的钱得到双倍的性能，所以显然：在预算充足的情况下1T的性价比最高，但预算不高的情况下，结合实际需求考虑绝对价格就好。</p>
+<p>而加一块机械的话，这里以西数紫盘为例（蓝盘很多都变成SMR了，紫盘基本都是CMR，速度更快价格还便宜，推荐购买紫盘）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">容量</th>
+<th align="center">参考价</th>
+<th align="center">相对上级涨幅</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1T</td>
+<td align="center">265</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td align="center">2T</td>
+<td align="center">319</td>
+<td align="center">20.4%</td>
+</tr>
+<tr>
+<td align="center">4T</td>
+<td align="center">529</td>
+<td align="center">65.8%</td>
+</tr>
+</tbody></table>
+<p>于是这里就比较博弈了，如果你想升级固态或加配机械的话，加100多块能够加250G的固态，对于这个价位的轻度游戏和办公其实都够用了；加200多块可以变成1T的固态或者加1T的机械，前者稍显冗余，后者又亏且小气，又不如上2T的机械。</p>
+<p>所以这里还是建议<strong>结合自己的需求和预算选配</strong>，选择的余地是比较大的。如有大量存储需求可以考虑加机械，轻度游戏和办公可能500G的固态也就够了，单250G说实话是有些紧张的。另外，上到500G的话固态也可以去看看西数和铠侠（原东芝TOSHIBA），价位差别可能不大。</p>
+<p>哦对，可能有人会说淘宝会有几十1T的硬盘，建议这东西不要图便宜，这个价位、包括一百多1T的，十有八九是翻新盘。</p>
+<h3 id="机箱电源"><a href="#机箱电源" class="headerlink" title="机箱电源"></a>机箱电源</h3><p>这个部分我反到认为是最不能省钱的。前边再拮据，这里一省都能给归零哈哈哈。</p>
+<p>机箱是每天都在看的外观，主要的影响在于IO接口和防尘性。便宜的机箱吃灰、接口少，有的玻璃劣质还容易爆裂，所以我这里主要选择的倾向是<strong>不透光无玻璃、最好防尘静音散热好</strong>的机箱。</p>
+<p>当然了，低预算要啥自行车。之前给实验室主机换了个机箱（原配两侧的玻璃都碎了，一直都裸着吃灰还丑），300多块买了个安钛克P101个人认为是最好的满足以上要求的机箱。然而这里控制预算，就选择了另一机箱大牌Tt（Thermaltake）的启航者系列。</p>
+<p>我当时就各种找，发现无玻璃这需求还真的难满足，低价位机箱大都比较杀马特，启航者S3有凸起的玻璃，是和侧盖一体度比较高的，不像很多机箱是直接往玻璃上拧螺丝的，我认为可以接受吧。</p>
+<p>如果没有套装，启航者S3单独的价格活动时可在100元左右，单独再选够300W的国产品牌电源应该也不会超过100元，价格甚至可以压得更便宜（在购买当时，蹲了几天发现套装是最划算的选择了）。</p>
+<p>同价位竞品中，S5或者S3+都比较大了，我们一个matx的主板又没显卡，感觉配S3比较合适吧，另外也可以选购F1或是F1静音版，后者是纯塑料无玻璃的，价位上都差不多。</p>
+<p>再就是先马（SAMA）的几款机箱了，但先马一般都比较杀马特，我们又不玩儿光污染，感觉就没必要了。</p>
+<p>电源方面，从功率来讲，自营店那个230W的套装应该也可以，但是保险起见我还是选择了300W。如果不买套装，也可以选购如先马、爱国者等国产品牌的电源，在低端区域还是可以保证质量的吧。</p>
+<h2 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h2><p><em>以下内容多图预警。</em></p>
+<h3 id="拆包"><a href="#拆包" class="headerlink" title="拆包"></a>拆包</h3><p>我装的第一台电脑是12000元的，那么现在去个0又如何——装机之前我是非常自信的哦，结果真是踩了各种坑，可以说又提高了自己debug的水平。先上一下全家福：</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/01/LebwxcaUSz4hQRB.jpg"/></div>
+
+<p>东西是真的不多，内存条都是拿泡泡膜包着的；主板朴实无华，但拆包之后发现麻雀虽小五脏俱全，还配了中文说明书；速龙（Athlon）雪白的盒子爱了爱了、asgard塑封就数他格调高；电源则已经在机箱当中预装躺平躺好了，随之而来的是IO接口的线材，整体机箱的布局我认为也是比较合理、友好的。</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/01/t2Scl3apquB7DbP.jpg"/></div>
+
+<h3 id="CPU上主板"><a href="#CPU上主板" class="headerlink" title="CPU上主板"></a>CPU上主板</h3><p>一般装机第一步都是CPU上主板吧。大家注意，<strong>以后拆包CPU，一定要找个人在旁边拍视频</strong>！！！最好给CPU个特写之类的，这样万一出问题了，好歹可以知道是自己操作的问题，还是它本来就坏了。</p>
+<p>按说我也是老江湖了，第一次装机的时候战战兢兢还用手机支架全程录像，这次就没想那么多，结果就翻车了！我遇到了那个传说中最难搞的问题：<strong>CPU针脚歪了</strong>。</p>
+<div align=center><img width = 70% src ="https://i.loli.net/2021/11/01/2X36unZzBUij4Ev.jpg"/><br>注意看，边角处有几根针是歪的</div>
+
+<p>我拆包的时候是十分小心翼翼的，发现这个事情完全是后知后觉：当我尝试把CPU装上主板时，发现他扣不紧，就像下面这样：</p>
+<div align=center><img width = 70% src ="https://i.loli.net/2021/11/01/FGjBo98Pt2HDlw3.jpg"/></div>
+
+<p>然后还傻乎乎跑去问客服这样正不正常，那当然是不正常了。。然后拆了下来就发现针脚弯了。</p>
+<p>这个时候我知道，我需要拨针脚了。针脚这东西，说白了就是导线，所以一旦焊点断了，想要自行补救就十分困难了，肯定是要返厂修复的，所以千万不能掰断。</p>
+<p>试了试家里缝纫的针，太轻拨不动；试了试医用镊子，太厚，塞不进缝隙。直到从我妈的化妆包里翻出了这个类似锉刀一样的神器，简直perfect：</p>
+<div align=center><img width = 40% src ="https://i.loli.net/2021/11/02/lCxjDV1rF3k4LIt.jpg"/></div>
+
+<p>然后就这样一点点拨正、装上了。颇有一种张飞绣花的感觉。</p>
+<h3 id="电源线"><a href="#电源线" class="headerlink" title="电源线"></a>电源线</h3><p>之后装散热，插内存，装固态，按照说明书一点点来都没什么太大问题。注意插内存的最好姿势应该是两侧共同发力，听到卡扣声音就代表插上了。另外还要夸赞一下，200GE盒装原配散热风扇，还预先涂好了硅脂，体验极佳。</p>
+<p>正当我觉得万事顺利的时候，最后插电源线倒给我整不会了：这主板CPU供电是4pin的。之前我所接触的都是8pin，预装电源给的也是8pin接口，我试过用8pin死怼，哪怕另外4pin悬空呢，结果当然是怼不上的。</p>
+<p>给大家上个图感受一下：</p>
+<div align=center><img width = 80% src ="https://i.loli.net/2021/11/02/Lt651l4MHUKqI8G.png"/></div>
+
+<p>左边是我的A320M，右边是微星的B450M MORTAR，我估计大家插线的时候都是给啥口插啥，比如主板的24pin，显卡的8+6或者8+8等等，反正就是给啥口插啥总能插上，结果这波给了8pin让我插4pin我就蒙了。</p>
+<p>本来我已经绝望了，以为要买个8转4的转换线之类的，后悔自己为什么要买机电套装而不是买个全模的自己搭线没准还能挽救一下，最后我突发奇想：能不能把这8pin线掰开……是的就是这么离谱，然后我还真的掰开了……但是是要使劲的那种。</p>
+<p>嗯，所以说电源厂商早就考虑好了这件事情？还特意让你使劲才能掰卡，就是为了应对不同场景，以及这个解决方案也太过机智了吧……</p>
+<h3 id="内存-1"><a href="#内存-1" class="headerlink" title="内存"></a>内存</h3><p>嗯，下一个翻车的场景是内存。当我把一切都插好时，发型主板灯亮了，风扇也转起来了，然而屏幕却毫无显示，BIOS的主板logo都没有。</p>
+<p>在我排查不是显示器、显示器接线问题之后，客服表示很可能是内存的问题，之前我在实验室也确实遇到过因为内存而不亮屏的问题，拔插交换后依然无果，就开始怀疑是不是CPU针脚的问题（毕竟当时歪了）。</p>
+<p>但按说能装上、风扇也转，就不是CPU的问题。客服也蒙了，我们都共同怀疑是不是bios没刷，于是为此我还抠了主板纽扣电池放电，如果不会抠电池、放电的话，可以去b站找个视频学习下。</p>
+<div align=center><img width = 80% src ="https://i.loli.net/2021/11/02/mPRCqr91hLGAIEj.jpg"/><br>就是中间这个圆圆的小东西</div>
+
+<p>扣完之后我也不知道倒腾了啥，居然神奇的开开了，但这明显不是BIOS的问题，因为我并没有刷BIOS……</p>
+<p>事后复盘，可能是因为扣电池拆卸了一波内存，经过大量测试发现，原来锅在内存条这里：两个内存条一好一坏，这东西是“与门”，一个坏了主板就认为全坏了。</p>
+<p>前面说过，<strong>内存我是在淘宝第三方买的，而且知道这东西很容易有假冒、翻修什么的，容易翻车，特意买了威刚的大牌子</strong>。所以我这波还是比较放心的，毕竟终生质保，但多少有点气：难道我真的遇到假货了？</p>
+<p>于是我扫了一下内存条上的防伪检验二维码。这个检测系统还是很秀的，如果这个码是第一次被扫，他会告诉你这个是正品；而如果这个码不是第一次被扫，他会告诉你上一次扫描的时间，并提醒你谨防假冒。</p>
+<p>而我的这个就很迷了。好使的那根内存扫完没有问题，是正品；不好使的那根，提示我“<em>此数码已超过查询的有效期限</em>”。</p>
+<p>这就奇怪了，这俩明明是连号的，一个尾号是6，一个尾号是8，怎么一个正品一个就过期了呢？码过期了也是挺奇怪，不是终生质保吗？</p>
+<p>然后我就去问度娘，看到了这篇文章：<a target="_blank" rel="noopener" href="https://www.163.com/dy/article/GL104Q030512MJDN.html">翻新内存了解一下？</a>感觉自己这波应该是中枪了。描述基本一致，我这个内存买过来确实没有万紫千红的正品纸壳包装，而且是像金士顿普条一样的工包。</p>
+<p>当然了，店家态度还是很好的，当时购买时显示有运费险、15天退换，那自然是没问题的。</p>
+<p>有趣的是，他给我发的新货（我是又下了一单再退货的），尾号是7。</p>
+<h3 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h3><p>然后应该就没啥坑了。最后接上4K显示器，蜗牛虽小，也有大大的梦想。</p>
+<div align=center><img width = 80% src ="https://i.loli.net/2021/11/02/moSXlQkv5xgjJqT.jpg"/><br>显示器比主机贵，活久见</div>
+
+
+<p>因为不会打英雄联盟，就用使命召唤5试了试，1080p打僵尸还是很顺畅的，不过4K完全带不动哈哈哈哈。我估摸着英雄联盟DOTA不开全特效，应该也是没啥问题的。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>总之，这是一次难得的经历。遇事不要慌，无论是什么问题总会有解决的办法，人生就是一个不断试错、Debug的过程，可能这也是搞硬件吸引我的地方吧，和搞科研、读博一样有着类似的快感（虽然还没决定要不要转博）。</p>
+<p>最后放一下购买地址：</p>
+<ul>
+<li>板U套装是在京东的「中联电脑配件专营店」，另外还有淘宝的「滨捷数码专营店」价格也比较香，当时这俩好像就差2块钱。</li>
+<li>内存是在淘宝的「德利通电子内存批发」</li>
+</ul>
+<p>不确定能否放链接在正文中，就不放了，如有需求大家可以评论，我会视情况在评论中放出。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Muyiyunzi 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Muyiyunzi 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Muyiyunzi
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://muyiyunzi.github.io/2021/11/01/zhuangji/" title="【杂文】聊一个自装1200元的主机配置经历">http://muyiyunzi.github.io/2021/11/01/zhuangji/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/28/reading/" rel="prev" title="【干货】谈一谈CS.CV方向如何阅读论文？">
+                  <i class="fa fa-chevron-left"></i> 【干货】谈一谈CS.CV方向如何阅读论文？
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Muyiyunzi</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">29k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">27 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/2021/11/01/zhuangji/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() => 
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => {
+    new Waline(CONFIG.waline);
+  });
+});
+</script>
+</body>
+</html>

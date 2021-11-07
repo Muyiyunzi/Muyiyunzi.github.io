@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cola.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cola-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cola-16x16.png">
+  <link rel="mask-icon" href="/images/cola-logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,700,700italic%7CMa+Shan+Zheng:300,300italic,400,400italic,700,700italic%7CNoto+Sans+SC:300,300italic,400,400italic,700,700italic%7CRoboto:300,300italic,400,400italic,700,700italic%7CJetBrains+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"muyiyunzi.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"waline","storage":true,"lazyload":false,"nav":null,"activeClass":"waline"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="序前几天被导师扔了一篇DETR3D，让我看一下transformer能否应用在这个领域（凡事与transformer挂钩了他就很激动）。作为鲜有的在3D目标检测中应用transformer的文章，于是决定还是来写一写吧。 我也不知道写散装论文总结要花多少的精力，索性先来试一试，不一定长期更单篇。【毕竟，简单写几句躺在我的文献管理excel里不香吗】【嗯！但发出来可以知识共享，让更多的人获得快乐QA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【散装论文】DETR3D：将DETR用于3D目标检测">
+<meta property="og:url" content="http://muyiyunzi.github.io/2021/11/04/2111-detr3d/index.html">
+<meta property="og:site_name" content="慕弋云子">
+<meta property="og:description" content="序前几天被导师扔了一篇DETR3D，让我看一下transformer能否应用在这个领域（凡事与transformer挂钩了他就很激动）。作为鲜有的在3D目标检测中应用transformer的文章，于是决定还是来写一写吧。 我也不知道写散装论文总结要花多少的精力，索性先来试一试，不一定长期更单篇。【毕竟，简单写几句躺在我的文献管理excel里不香吗】【嗯！但发出来可以知识共享，让更多的人获得快乐QA">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-04T13:01:08.000Z">
+<meta property="article:modified_time" content="2021-11-06T08:34:57.833Z">
+<meta property="article:author" content="Muyiyunzi">
+<meta property="article:tag" content="读论文">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="多目视觉">
+<meta property="article:tag" content="3D目标检测">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://muyiyunzi.github.io/2021/11/04/2111-detr3d/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://muyiyunzi.github.io/2021/11/04/2111-detr3d/","path":"2021/11/04/2111-detr3d/","title":"【散装论文】DETR3D：将DETR用于3D目标检测"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【散装论文】DETR3D：将DETR用于3D目标检测 | 慕弋云子</title>
+  
+
+
+
+<link rel="dns-prefetch" href="https://blog-jade-kappa.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">慕弋云子</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">心有猛虎，细嗅蔷薇</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-如何食用本博客"><a href="/about/" rel="section"><i class="fas fa-cookie-bite fa-fw"></i>如何食用本博客</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-踩一踩"><a href="/guestbook/" rel="section"><i class="fas fa-shoe-prints fa-fw"></i>踩一踩</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">基本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%AE%B5%E8%AF%9D%E6%A6%82%E8%BF%B0%E8%AE%BA%E6%96%87"><span class="nav-number">3.</span> <span class="nav-text">一段话概述论文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%96%91%E6%83%91"><span class="nav-number">4.</span> <span class="nav-text">疑惑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-to-set-loss"><span class="nav-number">5.</span> <span class="nav-text">set-to-set loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E4%B8%8EGT"><span class="nav-number">5.1.</span> <span class="nav-text">预测与GT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82"><span class="nav-number">5.2.</span> <span class="nav-text">一些细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA"><span class="nav-number">5.3.</span> <span class="nav-text">讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2D-to-3D-%E7%89%B9%E5%BE%81%E5%8F%98%E6%8D%A2"><span class="nav-number">6.</span> <span class="nav-text">2D-to-3D 特征变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82-1"><span class="nav-number">6.1.</span> <span class="nav-text">一些细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%86%E8%8A%82"><span class="nav-number">7.</span> <span class="nav-text">其他细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9ADETR"><span class="nav-number">9.</span> <span class="nav-text">附录：DETR</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Muyiyunzi"
+      src="/images/avatar.jfif">
+  <p class="site-author-name" itemprop="name">Muyiyunzi</p>
+  <div class="site-description" itemprop="description">In me the tiger sniffs the rose.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Muyiyunzi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Muyiyunzi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/fan-jia-nan-36/answers/by_votes" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fan-jia-nan-36&#x2F;answers&#x2F;by_votes" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://muyiyunzi.github.io/2021/11/04/2111-detr3d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jfif">
+      <meta itemprop="name" content="Muyiyunzi">
+      <meta itemprop="description" content="In me the tiger sniffs the rose.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="慕弋云子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【散装论文】DETR3D：将DETR用于3D目标检测
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-04 21:01:08" itemprop="dateCreated datePublished" datetime="2021-11-04T21:01:08+08:00">2021-11-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-06 16:34:57" itemprop="dateModified" datetime="2021-11-06T16:34:57+08:00">2021-11-06</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2021/11/04/2111-detr3d/#waline-comments" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" id="/2021/11/04/2111-detr3d/" data-xid="/2021/11/04/2111-detr3d/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span id="/2021/11/04/2111-detr3d/" class="post-meta-item leancloud_visitors" data-flag-title="【散装论文】DETR3D：将DETR用于3D目标检测" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>前几天被导师扔了一篇DETR3D，让我看一下transformer能否应用在这个领域（凡事与transformer挂钩了他就很激动）。作为鲜有的在3D目标检测中应用transformer的文章，于是决定还是来写一写吧。</p>
+<p>我也不知道写散装论文总结要花多少的精力，索性先来试一试，不一定长期更单篇。【毕竟，简单写几句躺在我的文献管理excel里不香吗】【嗯！但发出来可以知识共享，让更多的人获得快乐QAQ】</p>
+<span id="more"></span>
+
+<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p><strong>论文题目</strong>：DETR3D: 3D Object Detection from Multi-view Images via 3D-to-2D Queries</p>
+<p><strong>论文链接</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2110.06922">https://arxiv.org/abs/2110.06922</a></p>
+<p><strong>代码链接</strong>：<a target="_blank" rel="noopener" href="https://github.com/wangyueft/detr3d">https://github.com/wangyueft/detr3d</a></p>
+<h2 id="一段话概述论文"><a href="#一段话概述论文" class="headerlink" title="一段话概述论文"></a>一段话概述论文</h2><p>这是一篇<em>多视角</em>（多目）<em>3D目标检测</em>的工作，非LiDAR，也非单目，而且纯粹地基于<em>nuScenes</em>数据集。本质上，这就是一篇将DETR拓展到3D检测中的工作，所以重点在于，如何将DETR中bipartite loss的思想应用在3D任务上。DETR的大致过程是提取图像特征→编码辅助输入→结合queries获得values→得到queries的检测结果，并做损失。DETR3D在此基础上，除了将bipartite loss拓展到了三维空间中，还另外引入了Deformable DETR的iterative bounding box refinement模块，即构建多层layer对query进行解码。</p>
+<hr>
+<p>通过DETR和DETR3D的网络结构对比，我们就可以简要领略这种改进是如何完成的：</p>
+<div align=center><img width = 100% src ="https://i.loli.net/2021/11/05/7XCLqbPzFQNvG52.png"/>DETR</div>
+
+<div align=center><img width = 100% src ="https://i.loli.net/2021/11/05/veLh46UdQi9uBWN.png"/>DETR3D</div>
+
+<p>注：如果你对DETR的结构不熟悉，或是想简单回顾一下DETR的思想，请参见<a href="#detr">附录：DETR</a>部分。</p>
+<h2 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h2><p>按照<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H44y1t75x">李沐老师读论文</a>的方式，首先先问一下自己，如果是你来做，会怎样实现这一思想？或者说，看完论文的Abstract之后，我思考一番产生了怎样的疑惑？</p>
+<p>我的想法是，</p>
+<ul>
+<li>在3D上做bipartite loss应该不难。</li>
+<li>如何借鉴deformable DETR，对特征不经编码得到key，却又能辅助decode部分的设计可能比较棘手（这事实上也是本文的重点部分）</li>
+<li><strong>multi-view</strong>又是怎么体现的？DETR是完全无关联的图像作为输入的</li>
+<li>最后，跳脱出论文，这种套用是否合理，是否真的发挥了transformer，或者说自注意力机制的优势？</li>
+</ul>
+<p>带着以上疑惑，我们来逐渐拆解DETR3D的网络结构。</p>
+<h2 id="set-to-set-loss"><a href="#set-to-set-loss" class="headerlink" title="set-to-set loss"></a>set-to-set loss</h2><p>我们先来看最简单的部分，作者是如何把bipartite loss拓展到3D空间的。在文中，这个loss被称作是set-to-set loss，对于loss的研究，其实我们<strong>只要搞清楚预测与GT</strong>就可以了。</p>
+<h3 id="预测与GT"><a href="#预测与GT" class="headerlink" title="预测与GT"></a>预测与GT</h3><p>这里的pred是<strong>prediction set</strong> $(\hat {\mathcal B}_\ell,\hat {\mathcal C}_\ell)$，GT则称作<strong>GT set</strong> $({\mathcal B},{\mathcal C})$。</p>
+<p>$\mathcal B$的含义取自bounding box，$\mathcal C$的含义取自class，如果你熟悉传统的目标检测，对这种$(b,c)$的形式应该是不陌生的。帽子（尖尖）代表是预测，角标$\ell$则表示layer。</p>
+<p>这个layer的含义就是特征提取FPN之后的多个layer，也就是说，对于每一个layer，都对应着一个pred出来的<strong>prediction set</strong>，他们都会和GT产生一个set-to-set loss。</p>
+<p>为了使中间层也获得较好的学习效果，作者这里使用了一个常用的coarse2fine的手段，即在training阶段每层的loss都会被计算，但是在inference时只取最后一层作为输出。</p>
+<h3 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h3><p>更进一步地考察loss的具体形式，论文中说$\hat{\mathcal{B}}<em>{\ell}=\left{\hat{\boldsymbol{b}}</em>{\ell 1}, \ldots, \hat{\boldsymbol{b}}<em>{\ell j}, \ldots, \hat{\boldsymbol{b}}</em>{\ell M^{<em>}}\right} \subset \mathbb{R}^{9}$，$\hat{\mathcal{C}}<em>{\ell}=\left{\hat</em>{\ell 1}, \ldots, \hat<em>{\ell j}, \ldots, \hat</em>{\ell M}\right} \subset \mathbb{Z}$，这里预测输出的每一个$\hat{\boldsymbol{b}}_{\ell i}$是3D的bounding box参数（位置、大小、heading angle和BEV视角中的速度），$M^{</em>}$是预先设定好的预测数量；每一个$\hat_{\ell i}$则对应category的类别（注意这里没有加粗，不是向量，因为只有1维），$M$是ground truth的数量。</p>
+<p>看到这里，有两个问题：</p>
+<ol>
+<li><p>$\hat{\mathcal{C}}_{\ell}$里面最后应该也是到$M^*$吧，不应该是每一个预测对应一个category吗？这应该是个谬误。</p>
+</li>
+<li><p>$\hat{\boldsymbol{b}}_{\ell i}$这里为什么是9个维度我不是很懂，我虽然没有使用过nuScenes，但粗略看了下，rotation是用四元数表示的，速度如果是一个张量的话，那么heading angle莫非也像kitti一样是$\alpha$和$r_y$？这算是个疑惑，毕竟没有细看代码不敢断言。</p>
+</li>
+</ol>
+<p>我们现在姑且假设$\hat{\mathcal{C}}_{\ell}$最后也是$M^*$的长度，接下来就像DETR一样，我们将这些pred对应的GT补以$\varnothing$的类别，然后做匈牙利算法排序就可以了，也即是说，我们要找到一种排列的方式，使得这种匹配的代价最小，具体地有：</p>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/05/PA3JK1EqOUcsFXW.png"/></div>
+
+
+<p>知道各位看到长串数学公式会头疼，这里做了详细的解释，结合下图的匹配过程食用更加。</p>
+<div align=center><img width = 70% src ="https://i.loli.net/2021/11/05/Aly3ZKvMUWu5JO1.png"/></div>
+
+
+<p>总而言之，这里的argmin鼓励我们找到一种预测的排列，使得anchor的顺序尽可能与GT匹配，当GT类别非空时寻找预测类标置信度最大者，当GT类别为空时寻找bbox最接近的。</p>
+<p>这里又有问题了：</p>
+<ol>
+<li><p>GT类别非空时，单纯看寻找预测概率最大似乎是不合理的吧。比如预测有两个同类bbox，如何确定谁排在前面、后面？这样就会出现bbox错位匹配的情况吧。我们看DETR里是怎么写的：$\hat{\sigma}=\underset{\sigma \in \mathfrak{S}<em>{N}}{\arg \min } \sum</em>{i}^{N} -\mathbb{1}<em>{\left{c</em>{i} \neq \varnothing\right}} \hat{p}<em>{\sigma(i)}\left(c</em>{i}\right)+\mathbb{1}<em>{\left{c</em>{i} \neq \varnothing\right}} \mathcal{L}<em>{\text {box }}\left(b</em>{i}, \hat{b}_{\sigma(i)}\right)$，DETR这里的matching loss，两个示性函数都是非空的啊喂，必须要在非空的时候加以bbox的约束才能避免出现错位的情况（即又要匹配的类别对，又要匹配的类别好），并且空集的时候在这里其实是不关注的。</p>
+</li>
+<li><p>也正是因为他把后面那个项的示性函数改成等于了，这就引申出一个问题，在padding空集的时候，你这里也需要padding bounding box了，而这怎么padding呢？在DETR当中是不必为补充的空集也补充一个bounding box，因为你无论怎么补充，你都无法指望预测的空bounding box匹配上你的补充，所以这一点也是比较令人迷惑的。</p>
+</li>
+</ol>
+<p>如果以上你听得一知半解，我们再来看找到排列之后的损失计算，就更能理解这种诡谲了：</p>
+<p>$\mathcal{L}<em>{\text {sup }}=\sum</em>{j=1}^{N}-\log \hat{p}<em>{\sigma^{*}(j)}\left(c</em>{j}\right)+1_{\left{c_{j}=\varnothing\right}} \mathcal{L}<em>{\mathrm{box}}\left(\boldsymbol{b}</em>{j}, \hat{\boldsymbol{b}}_{\sigma^{*}(j)}\right)$</p>
+<p>这里也基本是和DETR类似的，不考虑符号上使用上的区别，就只有示性函数中把不等号变成了等号这样严肃的区别，于是这就造成了：当类别非空时，你不做bounding box上的loss，而现在类别空了你反而来做bounding box的loss。<strong>所以我强烈怀疑应该是论文中两处都打错了，否则结果应该不会还能排到SOTA</strong>。不知道是不是因为arxiv版本挂错了，还是真的审稿人粗心不看公式。</p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><p>如果以上推断成立，那么就算我们脑补修改一下这个loss，其实也有值得商榷的地方：我本来期待着他的loss至少是什么IoU loss之类的，结果就是简简单单的L1。在KITTI-object那边的工作中，其实涌现了很多类似mIoU loss等创新性的工作。这样不考虑parameters在3D空间中的实际的bounding box意义，而直接做L1 loss，这样的学习效果是否会好、是否合理？</p>
+<h2 id="2D-to-3D-特征变换"><a href="#2D-to-3D-特征变换" class="headerlink" title="2D-to-3D 特征变换"></a>2D-to-3D 特征变换</h2><p>解决了loss如何计算的问题，然后我们就来正序地研究一下，网络结构中这几条虚线的具体含义。</p>
+<p>前边的特征提取就不再赘述了，类似DETR，也是使用了ResNet+FPN的结构，得到4个level、不同尺度的特征。</p>
+<div align=center><img width = 70% src ="https://i.loli.net/2021/11/05/gCBUb84WMV2EYy1.png"/></div>
+
+<p>重点便在于如何解读这里的几条虚线了。起初，我是按照图例中给出的红色在最上、黄色在最下的顺序来解读的，以为是要先对特征进行操作，然后对query再加工提取，在feature space中去做loss……我还纳闷呢，明明人家说是在3D空间中做loss，这咋回事呢，而且transformer的黑色框框里，向右的黑色箭头也对不上啊……</p>
+<p>纠结了好久才明白正确的理解方式是<strong>从蓝色开始看到红色，实际上所有虚线加起来的操作就是向右黑线</strong>……由于文中图例文字太小，这里按照虚线的顺序依次解读下以上的操作：</p>
+<ol>
+<li>首先明确，object queries是类似DETR那样，即先随机生成$M^*$个bounding box，类似先生成一堆anchor box，只不过这里的box是会被最后的loss梯度回传的。</li>
+<li>（蓝线）然后通过一个子网络，来对query预测一个三维空间中的参考点$\boldsymbol{c}_{\ell i}$（实际上就是3D bbox的中心）。通过角标我们可以看出，这个操作是<strong>layer-wise、query-wise</strong>的。这两个wise的概念参见下文的讨论。</li>
+<li>（绿线）利用相机参数，将这个3D参考点反投影回图像中，找到其在原始图像中对应的位置。</li>
+<li>（黄线）从图像中的位置出发，找到其在每个layer中对应的特征映射中的部分。</li>
+<li>（红线）利用多头注意力机制，将找出的特征映射部分对queries进行refine。这种refine过程是逐层进行的，理论上，更靠后的layer应该会吸纳更多的特征信息。</li>
+<li>（黑色虚线框之后）得到新的queries之后，再通过两个子网络分别预测bounding box和类别，然后就进入我们之前讨论的loss部分了。</li>
+</ol>
+<p>这里一定要<strong>注意</strong>，从蓝线开始，就像deformable DETR一样，queries是划分为了多个layer输入的（去查了一下代码，这里应该是6个layer），这个layer和FPN得到的feature layer是不同的（所以为免歧义，我在前后文都称之为feature level了），feature的level是四层，所以总结一下是：<strong>每一个level的feature都应该对应输入每个layer的queries</strong>，所以实际上应该会有4*6=24个输入（当然实际运算要更复杂一些）。</p>
+<h3 id="一些细节-1"><a href="#一些细节-1" class="headerlink" title="一些细节"></a>一些细节</h3><p>了解了大致流程后，如果你关注具体的操作细节，那么可以继续看这个部分：</p>
+<ol>
+<li><p>query在输入时的形式应该就已经经过了编码？不管此时query是什么形式，蓝线就是一个预测中心点的过程，根据文中所述这是由一个neural network完成的，也没有说是什么、也没有说体量；但在黑色虚线框之后，得到新的query之后又要完成解码预测bbox和类别，而预测bbox之后意味着中心点求个平均就出来了，那么这两个网络是否可以共享参数？（或者说是否应该共享参数？）</p>
+</li>
+<li><p>绿线的过程就是一个使用$\boldsymbol{c}<em>{\ell i}$的齐次坐标形式$\boldsymbol{c}</em>{\ell i}^{<em>}$，左乘相机投影矩阵完成的，是一个非常纯粹的数学过程，对应文章中公式（2）。但是这里注意，nuScenes数据集是有六个相机同时运作的，所以<strong>这里实际上会得到$6\times$个中心点数量</strong>。到这里，应该是$M^</em>\times L \times 6$个投影后的中心点，根据代码$M^{*}=900, L=6$。</p>
+</li>
+<li><p>然后就涉及到这些投影后的中心点如何映射到每个level的FPN当中，因为每个level的feature尺寸不一样，所以这里是通过比较常规的、torch默认的双线性插值完成的。到此，我们的输入**又增加了$4 \times $**，因为前文说过，FPN最后得到4个level。</p>
+</li>
+<li><p>承接第2条，因为nuScenes的六个图像视角覆盖了整个全景，那么显然中心点投影并不会出现在某些视角的图像当中，这时找到的图像特征什么的显然是不合理的，应该去除。虽然应该在2之后就做这件事了，但可能是为了运算方便，作者放在了这里：可以添加一个布尔变量$\sigma_{\ell kmi}$来指示投影点是否valid，再对level和camera求平均，我们就可以得到一份只关于layer、query数量的feature，这部分feature是十分有价值的，我们可以将其Add在本layer的query中、向后传递成为下一层的refined query。</p>
+</li>
+<li><p>我的理解是，<strong>2、3的部分其实就是类似transformer中FFN的设计（只是这里没有简单地用MLP），而3的部分应该对应Add &amp; Norm的部分</strong>。不过transformer变种如此之多，可能也不必这样生搬硬套，了解流程就好。</p>
+</li>
+</ol>
+<h2 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h2><ol>
+<li><p>训练是AdamW，weight decay=1e-4，训练12 eps，8块3090，每个GPU batchsize=1。初始lr=1e-4，8th为1e-5，11th为1e-6。</p>
+</li>
+<li><p>文中主要对标的是FCOS3D和CenterNet，在leaderboard上对标DD3D，虽然DD3D使用了额外的深度数据集，但最终得益于mAVEF方面的大幅度碾压才得以使最终的NDS略高于DD3D（+0.002）。吹毛求疵的话，其实在其他指标方面都不如DD3D。</p>
+</li>
+<li><p>得益于DETR，在inference time没有NMS确实看起来是一个优势，不过似乎也没有给出更多的训练和inference时间方面的对比。</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后来总结，回答一下一开始提出的几个疑惑。</p>
+<ul>
+<li>关于bipartite loss和使用特征的方式，在此就不再赘述了，诸多细节与疑惑均已在讨论中提出。</li>
+<li>multi-view体现在query对同一时刻的六张图像同时进行了学习，单就这一点而言其思路就是比较超前的。传统的Monocular方法都是单张图像输入输出、multiview方法大家考虑的也是时间序列上的长序列，而并没有拓展到多视角上。</li>
+<li>关于注意力机制的问题，我们可以回忆一下，DETR令人震撼的地方其实是在于decoder attention可以关注到bounding box中的特征：</li>
+</ul>
+<div align=center><img width = 90% src ="https://i.loli.net/2021/11/06/18ziJ2E9vDMHuod.png"/></div>
+
+<p>而在这里，文中其实是没有给出什么可视化的效果，或者类似“all box predictions”这种grid可视化图。强行分析的话，我认为亮点反而可能在于，这种多目图像之间特征的求和（简单的1x1conv）并对query的refine，其实是替代了传统的多目匹配工作，使得这种3D-to-2D Queries可以有效跨越多目图像，更应该是本文的落脚点和关注之处。</p>
+<p>总的来讲，还有很多疑惑，也还有很多可发展的地方。</p>
+<p>不过最后的最后，还是要说一句，本人水平有限，还希望各位能带着批判的眼光审阅和讨论。</p>
+<h2 id="附录：DETR"><a href="#附录：DETR" class="headerlink" title="附录：DETR"></a><span id="detr">附录：DETR</span></h2><p>（有时间更吧）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Muyiyunzi 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Muyiyunzi 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Muyiyunzi
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://muyiyunzi.github.io/2021/11/04/2111-detr3d/" title="【散装论文】DETR3D：将DETR用于3D目标检测">http://muyiyunzi.github.io/2021/11/04/2111-detr3d/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%BB%E8%AE%BA%E6%96%87/" rel="tag"># 读论文</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/%E5%A4%9A%E7%9B%AE%E8%A7%86%E8%A7%89/" rel="tag"># 多目视觉</a>
+              <a href="/tags/3D%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="tag"># 3D目标检测</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/03/template/" rel="prev" title="【记录】论文写作常用语料收集">
+                  <i class="fa fa-chevron-left"></i> 【记录】论文写作常用语料收集
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Muyiyunzi</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">40k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">36 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://blog-jade-kappa.vercel.app/","placeholder":"Just go go","avatar":"mp","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":[],"avatarCDN":"https://sdn.geekzu.org/avatar/","requiredMeta":["nick"],"dark":"auto","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili","https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji"],"locale":{"placeholder":"来说点什么吧~\n（昵称必填，其余随意）","admin":"博主","nick":"昵称*","mail":"邮箱","link":"个人主页网址（http://）"},"el":"#waline-comments","libUrl":"https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js","path":"/2021/11/04/2111-detr3d/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() => 
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => {
+    new Waline(CONFIG.waline);
+  });
+});
+</script>
+</body>
+</html>

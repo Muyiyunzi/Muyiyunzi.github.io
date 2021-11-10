@@ -28,7 +28,7 @@
 <meta property="og:description" content="序前几天被导师扔了一篇DETR3D，让我看一下transformer能否应用在这个领域（凡事与transformer挂钩了他就很激动）。作为鲜有的在3D目标检测中应用transformer的文章，于是决定还是来写一写吧。 我也不知道写散装论文总结要花多少的精力，索性先来试一试，不一定长期更单篇。【毕竟，简单写几句躺在我的文献管理excel里不香吗】【嗯！但发出来可以知识共享，让更多的人获得快乐QA">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-04T13:01:08.000Z">
-<meta property="article:modified_time" content="2021-11-06T08:34:57.833Z">
+<meta property="article:modified_time" content="2021-11-10T06:55:18.635Z">
 <meta property="article:author" content="Muyiyunzi">
 <meta property="article:tag" content="读论文">
 <meta property="article:tag" content="CV">
@@ -237,7 +237,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-11-06 16:34:57" itemprop="dateModified" datetime="2021-11-06T16:34:57+08:00">2021-11-06</time>
+        <time title="修改时间：2021-11-10 14:55:18" itemprop="dateModified" datetime="2021-11-10T14:55:18+08:00">2021-11-10</time>
       </span>
 
   
@@ -277,7 +277,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>6.6k</span>
+      <span>6.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -322,7 +322,7 @@
 <h2 id="set-to-set-loss"><a href="#set-to-set-loss" class="headerlink" title="set-to-set loss"></a>set-to-set loss</h2><p>我们先来看最简单的部分，作者是如何把bipartite loss拓展到3D空间的。在文中，这个loss被称作是set-to-set loss，对于loss的研究，其实我们<strong>只要搞清楚预测与GT</strong>就可以了。</p>
 <h3 id="预测与GT"><a href="#预测与GT" class="headerlink" title="预测与GT"></a>预测与GT</h3><p>这里的pred是<strong>prediction set</strong> $(\hat {\mathcal B}_\ell,\hat {\mathcal C}_\ell)$，GT则称作<strong>GT set</strong> $({\mathcal B},{\mathcal C})$。</p>
 <p>$\mathcal B$的含义取自bounding box，$\mathcal C$的含义取自class，如果你熟悉传统的目标检测，对这种$(b,c)$的形式应该是不陌生的。帽子（尖尖）代表是预测，角标$\ell$则表示layer。</p>
-<p>这个layer的含义就是特征提取FPN之后的多个layer，也就是说，对于每一个layer，都对应着一个pred出来的<strong>prediction set</strong>，他们都会和GT产生一个set-to-set loss。</p>
+<p>这个layer的含义不明白没有关系，你可以先大致理解为有许多个layer，而每一个layer，都对应着一个pred出来的<strong>prediction set</strong>，而他们都会和<strong>同一个GT</strong>产生一个set-to-set loss。</p>
 <p>为了使中间层也获得较好的学习效果，作者这里使用了一个常用的coarse2fine的手段，即在training阶段每层的loss都会被计算，但是在inference时只取最后一层作为输出。</p>
 <h3 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h3><p>更进一步地考察loss的具体形式，论文中说$\hat{\mathcal{B}}<em>{\ell}=\left{\hat{\boldsymbol{b}}</em>{\ell 1}, \ldots, \hat{\boldsymbol{b}}<em>{\ell j}, \ldots, \hat{\boldsymbol{b}}</em>{\ell M^{<em>}}\right} \subset \mathbb{R}^{9}$，$\hat{\mathcal{C}}<em>{\ell}=\left{\hat</em>{\ell 1}, \ldots, \hat<em>{\ell j}, \ldots, \hat</em>{\ell M}\right} \subset \mathbb{Z}$，这里预测输出的每一个$\hat{\boldsymbol{b}}_{\ell i}$是3D的bounding box参数（位置、大小、heading angle和BEV视角中的速度），$M^{</em>}$是预先设定好的预测数量；每一个$\hat_{\ell i}$则对应category的类别（注意这里没有加粗，不是向量，因为只有1维），$M$是ground truth的数量。</p>
 <p>看到这里，有两个问题：</p>
@@ -399,7 +399,12 @@
 <p>而在这里，文中其实是没有给出什么可视化的效果，或者类似“all box predictions”这种grid可视化图。强行分析的话，我认为亮点反而可能在于，这种多目图像之间特征的求和（简单的1x1conv）并对query的refine，其实是替代了传统的多目匹配工作，使得这种3D-to-2D Queries可以有效跨越多目图像，更应该是本文的落脚点和关注之处。</p>
 <p>总的来讲，还有很多疑惑，也还有很多可发展的地方。</p>
 <p>不过最后的最后，还是要说一句，本人水平有限，还希望各位能带着批判的眼光审阅和讨论。</p>
-<h2 id="附录：DETR"><a href="#附录：DETR" class="headerlink" title="附录：DETR"></a><span id="detr">附录：DETR</span></h2><p>（有时间更吧）</p>
+<h2 id="附录：DETR"><a href="#附录：DETR" class="headerlink" title="附录：DETR"></a><span id="detr">附录：DETR</span></h2><p>关于DETR的解读全网应该比较多了，我也就不过多展开了。在此我主要参考的是b站的这两个视频：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qg4y1B7rL">[论文简析]DETR: End-to-End Object Detection with Transfromers[2005.12872]_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1T64y1D7NY">【中文字幕】DETR 论文解读_哔哩哔哩_bilibili</a></li>
+</ol>
+<p>如果你只是想大致了解DETR思想，那么建议着重关注bipartite loss的设计，DETR3D在此部分上的设计与DETR非常相似。</p>
 
     </div>
 
@@ -491,13 +496,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">41k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">36 分钟</span>
+    <span title="站点阅读时长">37 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
